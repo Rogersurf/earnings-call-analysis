@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual env
+.venv/
+venv/
+
+# Data
+data/raw/
+data/processed/
+data/discovered_urls.json
+
+# OS
+.DS_Store
+
+# VSCode
+.vscode/
+
+# Logs
+*.log
