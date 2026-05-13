@@ -10,6 +10,8 @@ venv/
 data/raw/
 data/processed/
 data/discovered_urls.json
+data/database/*.db
+data/database/*.parquet
 
 # OS
 .DS_Store
@@ -19,3 +21,17 @@ data/discovered_urls.json
 
 # Logs
 *.log
+
+# Databases
+*.db
+
+# Parquet
+*.parquet
+
+# Hugging Face
+hf_dataset/
+
+# Charts
+analysis/charts/
+analysis/charts_clean/
+analysis/reports/
