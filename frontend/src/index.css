@@ -1,0 +1,464 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===================================================== */
+/* ROOT */
+/* ===================================================== */
+
+:root {
+
+  color-scheme: dark;
+
+  --bg-primary: #050816;
+  --bg-secondary: #0b1023;
+  --bg-card: rgba(15, 23, 42, 0.88);
+
+  --border-primary: rgba(0,255,255,0.08);
+
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --cyan: #00e5ff;
+  --violet: #a855f7;
+  --red: #ff6b6b;
+  --green: #22c55e;
+  --yellow: #facc15;
+
+  --shadow-cyan:
+    0 0 25px rgba(0,229,255,0.12);
+
+  --shadow-violet:
+    0 0 25px rgba(168,85,247,0.12);
+
+  font-family:
+    Inter,
+    system-ui,
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(0,229,255,0.06),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(168,85,247,0.08),
+      transparent 30%
+    ),
+    #050816;
+
+  color: var(--text-primary);
+
+  text-rendering: optimizeLegibility;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===================================================== */
+/* BODY */
+/* ===================================================== */
+
+html,
+body,
+#root {
+
+  margin: 0;
+  padding: 0;
+
+  width: 100%;
+  min-height: 100%;
+
+  background: var(--bg-primary);
+
+  overflow-x: hidden;
+
+  scroll-behavior: smooth;
+}
+
+body {
+
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(0,229,255,0.05),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(168,85,247,0.06),
+      transparent 25%
+    ),
+    linear-gradient(
+      180deg,
+      #050816 0%,
+      #060b1b 100%
+    );
+
+  color: white;
+}
+
+/* ===================================================== */
+/* TYPOGRAPHY */
+/* ===================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+  margin: 0;
+
+  font-weight: 700;
+
+  letter-spacing: -0.03em;
+}
+
+p {
+
+  margin: 0;
+}
+
+/* ===================================================== */
+/* SCROLLBAR */
+/* ===================================================== */
+
+::-webkit-scrollbar {
+
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,229,255,0.18),
+      rgba(168,85,247,0.18)
+    );
+
+  border-radius: 999px;
+
+  border: 2px solid transparent;
+
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,229,255,0.35),
+      rgba(168,85,247,0.35)
+    );
+}
+
+/* ===================================================== */
+/* SELECTION */
+/* ===================================================== */
+
+::selection {
+
+  background:
+    rgba(0,229,255,0.25);
+
+  color: white;
+}
+
+/* ===================================================== */
+/* GLASS EFFECT */
+/* ===================================================== */
+
+.glass {
+
+  background:
+    rgba(15,23,42,0.72);
+
+  backdrop-filter:
+    blur(18px);
+
+  border:
+    1px solid rgba(255,255,255,0.05);
+}
+
+/* ===================================================== */
+/* GLOW SYSTEM */
+/* ===================================================== */
+
+.glow-cyan {
+
+  box-shadow:
+    0 0 30px rgba(0,229,255,0.15);
+}
+
+.glow-violet {
+
+  box-shadow:
+    0 0 30px rgba(168,85,247,0.15);
+}
+
+.glow-red {
+
+  box-shadow:
+    0 0 30px rgba(255,107,107,0.15);
+}
+
+/* ===================================================== */
+/* CARD HOVER */
+/* ===================================================== */
+
+.card-hover {
+
+  transition:
+    all 0.3s ease;
+}
+
+.card-hover:hover {
+
+  transform:
+    translateY(-2px);
+
+  border-color:
+    rgba(0,229,255,0.2);
+
+  box-shadow:
+    0 0 30px rgba(0,229,255,0.08);
+}
+
+/* ===================================================== */
+/* LIVE PULSE */
+/* ===================================================== */
+
+.live-dot {
+
+  position: relative;
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 999px;
+
+  background:
+    #22c55e;
+}
+
+.live-dot::after {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 999px;
+
+  background:
+    rgba(34,197,94,0.4);
+
+  animation:
+    pulse-ring 1.8s infinite;
+}
+
+@keyframes pulse-ring {
+
+  0% {
+
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+/* ===================================================== */
+/* FLOATING ANIMATION */
+/* ===================================================== */
+
+.float {
+
+  animation:
+    floating 6s ease-in-out infinite;
+}
+
+@keyframes floating {
+
+  0% {
+
+    transform:
+      translateY(0px);
+  }
+
+  50% {
+
+    transform:
+      translateY(-6px);
+  }
+
+  100% {
+
+    transform:
+      translateY(0px);
+  }
+}
+
+/* ===================================================== */
+/* CYBER GRID */
+/* ===================================================== */
+
+.cyber-grid {
+
+  position: relative;
+}
+
+.cyber-grid::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.025) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    40px 40px;
+
+  pointer-events: none;
+
+  mask-image:
+    radial-gradient(
+      circle,
+      white,
+      transparent 90%
+    );
+}
+
+/* ===================================================== */
+/* REACT FLOW */
+/* ===================================================== */
+
+.react-flow__controls {
+
+  border:
+    1px solid rgba(0,255,255,0.08) !important;
+
+  background:
+    rgba(11,16,35,0.92) !important;
+
+  backdrop-filter:
+    blur(12px);
+}
+
+.react-flow__controls button {
+
+  background:
+    transparent !important;
+
+  color:
+    white !important;
+
+  border-bottom:
+    1px solid rgba(255,255,255,0.04) !important;
+}
+
+.react-flow__controls button:hover {
+
+  background:
+    rgba(0,229,255,0.08) !important;
+}
+
+.react-flow__minimap {
+
+  border:
+    1px solid rgba(0,255,255,0.08) !important;
+
+  background:
+    rgba(11,16,35,0.92) !important;
+
+  backdrop-filter:
+    blur(12px);
+}
+
+/* ===================================================== */
+/* INPUTS */
+/* ===================================================== */
+
+input {
+
+  font-family:
+    inherit;
+}
+
+/* ===================================================== */
+/* LINKS */
+/* ===================================================== */
+
+a {
+
+  color: inherit;
+
+  text-decoration: none;
+}
+
+/* ===================================================== */
+/* UTILITY */
+/* ===================================================== */
+
+.text-gradient {
+
+  background:
+    linear-gradient(
+      90deg,
+      #00e5ff,
+      #a855f7
+    );
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+.border-gradient {
+
+  border:
+    1px solid transparent;
+
+  background:
+    linear-gradient(
+      #0b1023,
+      #0b1023
+    ) padding-box,
+
+    linear-gradient(
+      90deg,
+      rgba(0,229,255,0.4),
+      rgba(168,85,247,0.4)
+    ) border-box;
+}

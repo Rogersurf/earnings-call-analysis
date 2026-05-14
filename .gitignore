@@ -93,3 +93,26 @@ analysis/reports/
 tmp/
 temp/
 .cache/
+
+# =========================================================
+# FRONTEND / REACT / VITE
+# =========================================================
+
+frontend/node_modules/
+frontend/dist/
+frontend/.vercel/
+
+# Vercel
+.vercel/
+
+# React build artifacts
+dist/
+
+# Node logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+frontend/.env
+frontend/.env.local
