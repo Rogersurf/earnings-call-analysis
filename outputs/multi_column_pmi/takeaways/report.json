@@ -1,0 +1,109 @@
+{
+    "column": "takeaways",
+    "total_tokens": 1278628,
+    "vocabulary_size": 26923,
+    "total_bigrams": 508889,
+    "filtered_bigrams": 5683,
+    "top_pmi": [
+        {
+            "bigram": "exome genome",
+            "frequency": 24,
+            "pmi": 14.8697
+        },
+        {
+            "bigram": "taco bell",
+            "frequency": 33,
+            "pmi": 14.8347
+        },
+        {
+            "bigram": "los angeles",
+            "frequency": 40,
+            "pmi": 14.8267
+        },
+        {
+            "bigram": "pizza hut",
+            "frequency": 35,
+            "pmi": 14.722
+        },
+        {
+            "bigram": "puerto rico",
+            "frequency": 43,
+            "pmi": 14.6984
+        },
+        {
+            "bigram": "proof concept",
+            "frequency": 30,
+            "pmi": 14.6892
+        },
+        {
+            "bigram": "adi sfadia",
+            "frequency": 35,
+            "pmi": 14.6824
+        },
+        {
+            "bigram": "super bowl",
+            "frequency": 20,
+            "pmi": 14.5941
+        },
+        {
+            "bigram": "las vegas",
+            "frequency": 53,
+            "pmi": 14.5048
+        },
+        {
+            "bigram": "dow jones",
+            "frequency": 41,
+            "pmi": 14.2476
+        },
+        {
+            "bigram": "postpaid phone",
+            "frequency": 21,
+            "pmi": 14.2078
+        },
+        {
+            "bigram": "silicon carbide",
+            "frequency": 26,
+            "pmi": 14.1569
+        },
+        {
+            "bigram": "supreme court",
+            "frequency": 26,
+            "pmi": 14.1569
+        },
+        {
+            "bigram": "stand alone",
+            "frequency": 31,
+            "pmi": 13.527
+        },
+        {
+            "bigram": "watch list",
+            "frequency": 20,
+            "pmi": 13.4539
+        },
+        {
+            "bigram": "promoter score",
+            "frequency": 32,
+            "pmi": 13.4309
+        },
+        {
+            "bigram": "san diego",
+            "frequency": 23,
+            "pmi": 13.3793
+        },
+        {
+            "bigram": "storm fern",
+            "frequency": 21,
+            "pmi": 13.3554
+        },
+        {
+            "bigram": "san francisco",
+            "frequency": 46,
+            "pmi": 13.3482
+        },
+        {
+            "bigram": "front loaded",
+            "frequency": 23,
+            "pmi": 13.0599
+        }
+    ]
+}

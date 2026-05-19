@@ -1,0 +1,109 @@
+{
+    "column": "summary",
+    "total_tokens": 764594,
+    "vocabulary_size": 25551,
+    "total_bigrams": 411939,
+    "filtered_bigrams": 2421,
+    "top_pmi": [
+        {
+            "bigram": "pizza hut",
+            "frequency": 21,
+            "pmi": 14.8439
+        },
+        {
+            "bigram": "las vegas",
+            "frequency": 23,
+            "pmi": 14.8439
+        },
+        {
+            "bigram": "proof concept",
+            "frequency": 22,
+            "pmi": 14.0583
+        },
+        {
+            "bigram": "dow jones",
+            "frequency": 20,
+            "pmi": 13.6641
+        },
+        {
+            "bigram": "san francisco",
+            "frequency": 26,
+            "pmi": 13.6319
+        },
+        {
+            "bigram": "goodwill impairment",
+            "frequency": 20,
+            "pmi": 13.193
+        },
+        {
+            "bigram": "square feet",
+            "frequency": 47,
+            "pmi": 12.9865
+        },
+        {
+            "bigram": "front loaded",
+            "frequency": 31,
+            "pmi": 12.8077
+        },
+        {
+            "bigram": "pro forma",
+            "frequency": 65,
+            "pmi": 12.7499
+        },
+        {
+            "bigram": "artificial intelligence",
+            "frequency": 57,
+            "pmi": 12.4123
+        },
+        {
+            "bigram": "world cup",
+            "frequency": 31,
+            "pmi": 12.3667
+        },
+        {
+            "bigram": "agency mbs",
+            "frequency": 23,
+            "pmi": 12.2311
+        },
+        {
+            "bigram": "square foot",
+            "frequency": 22,
+            "pmi": 12.0613
+        },
+        {
+            "bigram": "foreign exchange",
+            "frequency": 68,
+            "pmi": 12.0077
+        },
+        {
+            "bigram": "ended sept",
+            "frequency": 30,
+            "pmi": 11.9084
+        },
+        {
+            "bigram": "realty trust",
+            "frequency": 23,
+            "pmi": 11.9002
+        },
+        {
+            "bigram": "little bit",
+            "frequency": 51,
+            "pmi": 11.879
+        },
+        {
+            "bigram": "charge offs",
+            "frequency": 65,
+            "pmi": 11.8788
+        },
+        {
+            "bigram": "life sciences",
+            "frequency": 60,
+            "pmi": 11.8096
+        },
+        {
+            "bigram": "joint venture",
+            "frequency": 119,
+            "pmi": 11.7674
+        }
+    ]
+}

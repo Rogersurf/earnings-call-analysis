@@ -1,0 +1,109 @@
+{
+    "column": "glossary",
+    "total_tokens": 359725,
+    "vocabulary_size": 19875,
+    "total_bigrams": 205283,
+    "filtered_bigrams": 1070,
+    "top_pmi": [
+        {
+            "bigram": "polyfluoroalkyl substances",
+            "frequency": 22,
+            "pmi": 13.7561
+        },
+        {
+            "bigram": "substandard doubtful",
+            "frequency": 20,
+            "pmi": 13.2866
+        },
+        {
+            "bigram": "loi letter",
+            "frequency": 21,
+            "pmi": 13.2601
+        },
+        {
+            "bigram": "cubic feet",
+            "frequency": 26,
+            "pmi": 12.9549
+        },
+        {
+            "bigram": "earth orbit",
+            "frequency": 21,
+            "pmi": 12.8127
+        },
+        {
+            "bigram": "minimally invasive",
+            "frequency": 33,
+            "pmi": 12.741
+        },
+        {
+            "bigram": "aoci accumulated",
+            "frequency": 45,
+            "pmi": 12.5668
+        },
+        {
+            "bigram": "letter intent",
+            "frequency": 22,
+            "pmi": 12.5388
+        },
+        {
+            "bigram": "hydraulic fracturing",
+            "frequency": 41,
+            "pmi": 12.3868
+        },
+        {
+            "bigram": "east africa",
+            "frequency": 31,
+            "pmi": 12.3814
+        },
+        {
+            "bigram": "duc drilled",
+            "frequency": 24,
+            "pmi": 12.3324
+        },
+        {
+            "bigram": "glucagon peptide",
+            "frequency": 59,
+            "pmi": 12.3175
+        },
+        {
+            "bigram": "promoter score",
+            "frequency": 29,
+            "pmi": 12.3145
+        },
+        {
+            "bigram": "charge offs",
+            "frequency": 21,
+            "pmi": 12.1632
+        },
+        {
+            "bigram": "bla biologics",
+            "frequency": 34,
+            "pmi": 12.0779
+        },
+        {
+            "bigram": "mexico canada",
+            "frequency": 27,
+            "pmi": 12.0732
+        },
+        {
+            "bigram": "denominated derivatives",
+            "frequency": 23,
+            "pmi": 11.9815
+        },
+        {
+            "bigram": "american depositary",
+            "frequency": 24,
+            "pmi": 11.9058
+        },
+        {
+            "bigram": "takes collect",
+            "frequency": 28,
+            "pmi": 11.8976
+        },
+        {
+            "bigram": "fid final",
+            "frequency": 25,
+            "pmi": 11.8668
+        }
+    ]
+}

@@ -1,0 +1,158 @@
+{
+    "total_tokens": 40054215,
+    "total_unique_words": 101857,
+    "total_bigrams": 7258297,
+    "filtered_bigrams": 39392,
+    "top_pmi": [
+        {
+            "bigram": "derek podhaizer",
+            "frequency": 116,
+            "pmi": 14.9865
+        },
+        {
+            "bigram": "supreme court",
+            "frequency": 321,
+            "pmi": 14.9802
+        },
+        {
+            "bigram": "mitch germain",
+            "frequency": 100,
+            "pmi": 14.9792
+        },
+        {
+            "bigram": "trevor cranston",
+            "frequency": 108,
+            "pmi": 14.9775
+        },
+        {
+            "bigram": "harold edwards",
+            "frequency": 153,
+            "pmi": 14.9768
+        },
+        {
+            "bigram": "counter uas",
+            "frequency": 188,
+            "pmi": 14.9741
+        },
+        {
+            "bigram": "ann salisbury",
+            "frequency": 130,
+            "pmi": 14.9689
+        },
+        {
+            "bigram": "noah poponak",
+            "frequency": 288,
+            "pmi": 14.9677
+        },
+        {
+            "bigram": "arun viswanathan",
+            "frequency": 235,
+            "pmi": 14.9579
+        },
+        {
+            "bigram": "keno hill",
+            "frequency": 120,
+            "pmi": 14.9543
+        },
+        {
+            "bigram": "glenn schorr",
+            "frequency": 212,
+            "pmi": 14.944
+        },
+        {
+            "bigram": "ronald kamdem",
+            "frequency": 309,
+            "pmi": 14.9331
+        },
+        {
+            "bigram": "los santos",
+            "frequency": 109,
+            "pmi": 14.9298
+        },
+        {
+            "bigram": "simeon siegel",
+            "frequency": 133,
+            "pmi": 14.9254
+        },
+        {
+            "bigram": "laura alber",
+            "frequency": 114,
+            "pmi": 14.9243
+        },
+        {
+            "bigram": "ravi shanker",
+            "frequency": 256,
+            "pmi": 14.9195
+        },
+        {
+            "bigram": "travis axelrod",
+            "frequency": 132,
+            "pmi": 14.9145
+        },
+        {
+            "bigram": "vijay rakesh",
+            "frequency": 159,
+            "pmi": 14.9109
+        },
+        {
+            "bigram": "albert nahmad",
+            "frequency": 170,
+            "pmi": 14.898
+        },
+        {
+            "bigram": "tsin huang",
+            "frequency": 334,
+            "pmi": 14.8961
+        },
+        {
+            "bigram": "paribas exane",
+            "frequency": 128,
+            "pmi": 14.8922
+        },
+        {
+            "bigram": "javier rodriguez",
+            "frequency": 136,
+            "pmi": 14.8838
+        },
+        {
+            "bigram": "travis stice",
+            "frequency": 138,
+            "pmi": 14.8835
+        },
+        {
+            "bigram": "invasive bladder",
+            "frequency": 101,
+            "pmi": 14.8815
+        },
+        {
+            "bigram": "vis vis",
+            "frequency": 325,
+            "pmi": 14.8627
+        },
+        {
+            "bigram": "noah zatzkin",
+            "frequency": 117,
+            "pmi": 14.8608
+        },
+        {
+            "bigram": "skilled nursing",
+            "frequency": 228,
+            "pmi": 14.8504
+        },
+        {
+            "bigram": "terry tillman",
+            "frequency": 152,
+            "pmi": 14.8503
+        },
+        {
+            "bigram": "pratt whitney",
+            "frequency": 136,
+            "pmi": 14.8496
+        },
+        {
+            "bigram": "linda tsai",
+            "frequency": 166,
+            "pmi": 14.8406
+        }
+    ]
+}

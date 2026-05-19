@@ -1,0 +1,109 @@
+{
+    "column": "transcript",
+    "total_tokens": 40054215,
+    "vocabulary_size": 101857,
+    "total_bigrams": 7258297,
+    "filtered_bigrams": 234461,
+    "top_pmi": [
+        {
+            "bigram": "carlos aguilar",
+            "frequency": 20,
+            "pmi": 14.9958
+        },
+        {
+            "bigram": "salty snacks",
+            "frequency": 39,
+            "pmi": 14.9945
+        },
+        {
+            "bigram": "hurricane beryl",
+            "frequency": 39,
+            "pmi": 14.9944
+        },
+        {
+            "bigram": "elizabeth boland",
+            "frequency": 27,
+            "pmi": 14.9914
+        },
+        {
+            "bigram": "henry schein",
+            "frequency": 58,
+            "pmi": 14.9909
+        },
+        {
+            "bigram": "derek leathers",
+            "frequency": 68,
+            "pmi": 14.9904
+        },
+        {
+            "bigram": "muscle shoals",
+            "frequency": 28,
+            "pmi": 14.9892
+        },
+        {
+            "bigram": "duane arnold",
+            "frequency": 59,
+            "pmi": 14.9885
+        },
+        {
+            "bigram": "pat mackin",
+            "frequency": 47,
+            "pmi": 14.9879
+        },
+        {
+            "bigram": "derek podhaizer",
+            "frequency": 116,
+            "pmi": 14.9865
+        },
+        {
+            "bigram": "mary szela",
+            "frequency": 21,
+            "pmi": 14.984
+        },
+        {
+            "bigram": "nerve stimulation",
+            "frequency": 71,
+            "pmi": 14.9832
+        },
+        {
+            "bigram": "susan kreh",
+            "frequency": 28,
+            "pmi": 14.9817
+        },
+        {
+            "bigram": "supreme court",
+            "frequency": 321,
+            "pmi": 14.9802
+        },
+        {
+            "bigram": "eastern seaboard",
+            "frequency": 20,
+            "pmi": 14.9798
+        },
+        {
+            "bigram": "checkpoint inhibitors",
+            "frequency": 78,
+            "pmi": 14.9793
+        },
+        {
+            "bigram": "mitch germain",
+            "frequency": 100,
+            "pmi": 14.9792
+        },
+        {
+            "bigram": "booz allen",
+            "frequency": 68,
+            "pmi": 14.9776
+        },
+        {
+            "bigram": "trevor cranston",
+            "frequency": 108,
+            "pmi": 14.9775
+        },
+        {
+            "bigram": "harold edwards",
+            "frequency": 153,
+            "pmi": 14.9768
+        }
+    ]
+}

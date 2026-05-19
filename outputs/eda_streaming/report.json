@@ -1,0 +1,375 @@
+{
+    "statistics": {
+        "total_transcripts": 9069,
+        "avg_words": 4823.12,
+        "max_words": 16908,
+        "min_words": 268,
+        "vocabulary_size": 101887
+    },
+    "top_words": [
+        [
+            "our",
+            1049111
+        ],
+        [
+            "you",
+            839757
+        ],
+        [
+            "year",
+            526390
+        ],
+        [
+            "are",
+            505736
+        ],
+        [
+            "quarter",
+            360511
+        ],
+        [
+            "million",
+            319648
+        ],
+        [
+            "think",
+            263449
+        ],
+        [
+            "growth",
+            262038
+        ],
+        [
+            "but",
+            250080
+        ],
+        [
+            "over",
+            237516
+        ],
+        [
+            "more",
+            235950
+        ],
+        [
+            "just",
+            235258
+        ],
+        [
+            "was",
+            232406
+        ],
+        [
+            "some",
+            170693
+        ],
+        [
+            "revenue",
+            169290
+        ],
+        [
+            "not",
+            166177
+        ],
+        [
+            "business",
+            165950
+        ],
+        [
+            "know",
+            160803
+        ],
+        [
+            "now",
+            159553
+        ],
+        [
+            "can",
+            153560
+        ],
+        [
+            "new",
+            149275
+        ],
+        [
+            "first",
+            148952
+        ],
+        [
+            "all",
+            147514
+        ],
+        [
+            "very",
+            141161
+        ],
+        [
+            "see",
+            137782
+        ],
+        [
+            "market",
+            136585
+        ],
+        [
+            "like",
+            133530
+        ],
+        [
+            "one",
+            131438
+        ],
+        [
+            "really",
+            130771
+        ],
+        [
+            "going",
+            129528
+        ]
+    ],
+    "top_bigrams": [
+        [
+            "you know",
+            118271
+        ],
+        [
+            "https www",
+            81332
+        ],
+        [
+            "over year",
+            77249
+        ],
+        [
+            "year over",
+            75589
+        ],
+        [
+            "little bit",
+            50407
+        ],
+        [
+            "full year",
+            50375
+        ],
+        [
+            "motley fool",
+            49612
+        ],
+        [
+            "fourth quarter",
+            49242
+        ],
+        [
+            "first quarter",
+            48371
+        ],
+        [
+            "cash flow",
+            44849
+        ],
+        [
+            "last year",
+            43800
+        ],
+        [
+            "chief executive",
+            43333
+        ],
+        [
+            "executive officer",
+            43260
+        ],
+        [
+            "long term",
+            40989
+        ],
+        [
+            "basis points",
+            38020
+        ],
+        [
+            "fool com",
+            37544
+        ],
+        [
+            "adjusted ebitda",
+            35585
+        ],
+        [
+            "next comes",
+            34320
+        ],
+        [
+            "second quarter",
+            32628
+        ],
+        [
+            "third quarter",
+            32316
+        ],
+        [
+            "our next",
+            32060
+        ],
+        [
+            "you can",
+            31360
+        ],
+        [
+            "www fool",
+            31283
+        ],
+        [
+            "url https",
+            31280
+        ],
+        [
+            "chief financial",
+            30904
+        ],
+        [
+            "financial officer",
+            30832
+        ],
+        [
+            "million million",
+            30706
+        ],
+        [
+            "you think",
+            28338
+        ],
+        [
+            "prior year",
+            27728
+        ],
+        [
+            "can you",
+            27437
+        ]
+    ],
+    "top_trigrams": [
+        [
+            "year over year",
+            74630
+        ],
+        [
+            "chief executive officer",
+            43195
+        ],
+        [
+            "https www fool",
+            31283
+        ],
+        [
+            "www fool com",
+            31283
+        ],
+        [
+            "chief financial officer",
+            30733
+        ],
+        [
+            "free cash flow",
+            26135
+        ],
+        [
+            "our next comes",
+            18883
+        ],
+        [
+            "type imageobject url",
+            18768
+        ],
+        [
+            "imageobject url https",
+            18768
+        ],
+        [
+            "com themotleyfool https",
+            18768
+        ],
+        [
+            "next comes line",
+            16982
+        ],
+        [
+            "motley fool transcribing",
+            15325
+        ],
+        [
+            "url https foolcdn",
+            14632
+        ],
+        [
+            "https foolcdn com",
+            14632
+        ],
+        [
+            "president chief executive",
+            14063
+        ],
+        [
+            "forward looking statements",
+            12608
+        ],
+        [
+            "name motley fool",
+            12512
+        ],
+        [
+            "url https www",
+            12512
+        ],
+        [
+            "image type imageobject",
+            12512
+        ],
+        [
+            "org wiki https",
+            12512
+        ],
+        [
+            "wiki https www",
+            12512
+        ],
+        [
+            "themotleyfool https www",
+            12512
+        ],
+        [
+            "com themotleyfoolofficial https",
+            12512
+        ],
+        [
+            "themotleyfoolofficial https www",
+            12512
+        ],
+        [
+            "little bit more",
+            11062
+        ],
+        [
+            "executive vice president",
+            10164
+        ],
+        [
+            "you our next",
+            9168
+        ],
+        [
+            "est image source",
+            9069
+        ],
+        [
+            "image source motley",
+            9069
+        ],
+        [
+            "source motley fool",
+            9069
+        ]
+    ]
+}

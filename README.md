@@ -231,3 +231,23 @@ independent ML applications
 Author
 
 Roger Braun (AKA: Rogério Braunschweiger, Rogersurf)
+
+Earnings Calls
+        ↓
+Corpus Statistics
+        ↓
+Entity Extraction
+        ↓
+SBERT Embeddings
+        ↓
+Vector Database
+        ↓
+Knowledge Graph
+        ↓
+Propagation Engine
+        ↓
+FinBERT Analysis
+        ↓
+LLM Reasoning Layer
+        ↓
+Dashboard / Multi-Agent

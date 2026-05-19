@@ -1,0 +1,109 @@
+{
+    "column": "article_intro",
+    "total_tokens": 298389,
+    "vocabulary_size": 10161,
+    "total_bigrams": 25598,
+    "filtered_bigrams": 168,
+    "top_pmi": [
+        {
+            "bigram": "near term",
+            "frequency": 21,
+            "pmi": 13.4864
+        },
+        {
+            "bigram": "general counsel",
+            "frequency": 30,
+            "pmi": 12.6019
+        },
+        {
+            "bigram": "basis points",
+            "frequency": 34,
+            "pmi": 12.5413
+        },
+        {
+            "bigram": "cash flow",
+            "frequency": 23,
+            "pmi": 12.1254
+        },
+        {
+            "bigram": "adjusted ebitda",
+            "frequency": 23,
+            "pmi": 11.9774
+        },
+        {
+            "bigram": "managing director",
+            "frequency": 33,
+            "pmi": 11.1316
+        },
+        {
+            "bigram": "july edt",
+            "frequency": 25,
+            "pmi": 11.0985
+        },
+        {
+            "bigram": "gross margin",
+            "frequency": 28,
+            "pmi": 10.9802
+        },
+        {
+            "bigram": "our analysts",
+            "frequency": 78,
+            "pmi": 10.9014
+        },
+        {
+            "bigram": "one our",
+            "frequency": 79,
+            "pmi": 10.5614
+        },
+        {
+            "bigram": "corporate development",
+            "frequency": 33,
+            "pmi": 10.3836
+        },
+        {
+            "bigram": "updated jul",
+            "frequency": 26,
+            "pmi": 9.2043
+        },
+        {
+            "bigram": "investor relations",
+            "frequency": 514,
+            "pmi": 9.1644
+        },
+        {
+            "bigram": "director investor",
+            "frequency": 90,
+            "pmi": 8.6122
+        },
+        {
+            "bigram": "head investor",
+            "frequency": 98,
+            "pmi": 8.424
+        },
+        {
+            "bigram": "need quote",
+            "frequency": 899,
+            "pmi": 8.3699
+        },
+        {
+            "bigram": "wednesday october",
+            "frequency": 29,
+            "pmi": 8.1558
+        },
+        {
+            "bigram": "updated feb",
+            "frequency": 73,
+            "pmi": 8.1087
+        },
+        {
+            "bigram": "quote one",
+            "frequency": 78,
+            "pmi": 8.0162
+        },
+        {
+            "bigram": "tuesday february",
+            "frequency": 29,
+            "pmi": 7.9617
+        }
+    ]
+}
