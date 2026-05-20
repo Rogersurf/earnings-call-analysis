@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import React, {
+  useEffect,
+  useState
+} from "react";
+
 import { motion } from "framer-motion";
 
 import Sidebar from "../components/layout/Sidebar";
@@ -10,8 +14,10 @@ import RightPanel from "../components/panels/RightPanel";
 import BottomTimeline from "../components/panels/BottomTimeline";
 
 import {
-  initialNodes,
-  initialEdges,
+  fetchPropagationGraph
+} from "../services/graphService";
+
+import {
   agentStreamMock,
   propagationTimeline,
 } from "../data/mockData";
@@ -20,6 +26,34 @@ export default function Dashboard() {
 
   const [selectedNode, setSelectedNode] =
     useState(null);
+
+  const [graphNodes, setGraphNodes] =
+    useState([]);
+
+  const [graphEdges, setGraphEdges] =
+    useState([]);
+
+  useEffect(() => {
+
+    async function loadGraph() {
+
+      const data =
+        await fetchPropagationGraph();
+
+      if (!data) return;
+
+      setGraphNodes(
+        data.results.nodes
+      );
+
+      setGraphEdges(
+        data.results.edges
+      );
+    }
+
+    loadGraph();
+
+  }, []);
 
   return (
 
@@ -137,8 +171,8 @@ export default function Dashboard() {
               <div className="h-[450px] rounded-xl overflow-hidden">
 
                 <PropagationGraph
-                  nodes={initialNodes}
-                  edges={initialEdges}
+                  nodes={graphNodes}
+                  edges={graphNodes}
                   onNodeClick={(event, node) =>
                     setSelectedNode(node)
                   }

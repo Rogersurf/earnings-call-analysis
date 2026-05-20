@@ -250,3 +250,5 @@ temp/
 #!data/graphs/sample_graph.gexf
 #!outputs/graph/graph_stats.csv
 #!analysis/reports/example_report.pdf
+
+parquet_registry.csv

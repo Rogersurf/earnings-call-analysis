@@ -1,7 +1,6 @@
-import Dashboard from './pages/Dashboard';
+import RetrievalChat from "./pages/RetrievalChat";
 
-function App() {
-  return <Dashboard />;
+export default function App() {
+
+  return <RetrievalChat />;
 }
-
-export default App;
