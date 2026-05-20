@@ -1,0 +1,434 @@
+[
+    {
+        "cluster_id": 0,
+        "community_label": "tax / rate / tax rate",
+        "community_size": 61,
+        "top_keywords": "tax, rate, tax rate, effective, effective tax, year, expected, income, higher, 2025, 2026, million, range, cash, guidance"
+    },
+    {
+        "cluster_id": 1,
+        "community_label": "year / million / ratio",
+        "community_size": 91,
+        "top_keywords": "year, million, ratio, premiums, insurance, premium, written, net, quarter, combined, combined ratio, segment, growth, loss, prior"
+    },
+    {
+        "cluster_id": 2,
+        "community_label": "year / noi / store",
+        "community_size": 33,
+        "top_keywords": "year, noi, store, growth, revenue, million, year year, basis, 000, occupancy, noi growth, property, points, basis points, quarter"
+    },
+    {
+        "cluster_id": 3,
+        "community_label": "leasing / square / rent",
+        "community_size": 97,
+        "top_keywords": "leasing, square, rent, lease, feet, square feet, year, occupancy, new, million, leased, leases, 000, growth, 000 square"
+    },
+    {
+        "cluster_id": 4,
+        "community_label": "ounces / 000 / production",
+        "community_size": 33,
+        "top_keywords": "ounces, 000, production, gold, ounce, year, 2025, silver, guidance, million, 000 ounces, aisc, cost, q4, higher"
+    },
+    {
+        "cluster_id": 5,
+        "community_label": "email / risks / email protected",
+        "community_size": 109,
+        "top_keywords": "email, risks, email protected, protected risks, protected, email email, year, management, quarter, revenue, million, stated, costs, higher, impact"
+    },
+    {
+        "cluster_id": 6,
+        "community_label": "guidance / year / share",
+        "community_size": 36,
+        "top_keywords": "guidance, year, share, ffo, 2025, midpoint, growth, core ffo, core, affo, million, raised, ffo share, 2026, range"
+    },
+    {
+        "cluster_id": 7,
+        "community_label": "year / revpar / year year",
+        "community_size": 27,
+        "top_keywords": "year, revpar, year year, quarter, million, hotels, growth, hotel, adjusted, rmb, revenue, margin, ebitda, increase, total"
+    },
+    {
+        "cluster_id": 8,
+        "community_label": "backlog / billion / year",
+        "community_size": 31,
+        "top_keywords": "backlog, billion, year, million, approximately, end, management, margin, year end, order, described, conversion, backlog conversion, market, new"
+    },
+    {
+        "cluster_id": 9,
+        "community_label": "billion / year / million",
+        "community_size": 80,
+        "top_keywords": "billion, year, million, aum, year year, fee, quarter, management, net, fees, assets, growth, 2025, revenues, revenue"
+    },
+    {
+        "cluster_id": 10,
+        "community_label": "million / revenue / year",
+        "community_size": 187,
+        "top_keywords": "million, revenue, year, growth, year year, sales, segment, 2025, quarter, total, increase, driven, billion, increased, q2"
+    },
+    {
+        "cluster_id": 11,
+        "community_label": "patient / engagement / new",
+        "community_size": 30,
+        "top_keywords": "patient, engagement, new, clinical, patients, care, palsonify, expansion, community, physician, company, adoption, commercial, volume, peer"
+    },
+    {
+        "cluster_id": 12,
+        "community_label": "phase / trial / data",
+        "community_size": 160,
+        "top_keywords": "phase, trial, data, clinical, study, patients, fda, 2026, pipeline, ii, iii, months, response, phase iii, expected"
+    },
+    {
+        "cluster_id": 13,
+        "community_label": "leadership / transition / board",
+        "community_size": 125,
+        "top_keywords": "leadership, transition, board, ceo, chief, officer, cfo, new, leadership transition, president, executive, announced, management, changes, continuity"
+    },
+    {
+        "cluster_id": 14,
+        "community_label": "eps / guidance / year",
+        "community_size": 40,
+        "top_keywords": "eps, guidance, year, growth, adjusted, eps guidance, 2025, adjusted eps, 2026, eps growth, share, quarter, core, target, midpoint"
+    },
+    {
+        "cluster_id": 15,
+        "community_label": "million / capex / capital",
+        "community_size": 90,
+        "top_keywords": "million, capex, capital, year, 2026, 2025, expenditures, capital expenditures, billion, expected, investment, guidance, growth, revenue, approximately"
+    },
+    {
+        "cluster_id": 16,
+        "community_label": "weather / winter / quarter",
+        "community_size": 28,
+        "top_keywords": "weather, winter, quarter, operational, management, expected, impact, sales, storm, january, revenue, year, storms, severe, impacts"
+    },
+    {
+        "cluster_id": 17,
+        "community_label": "management / water / gas",
+        "community_size": 60,
+        "top_keywords": "management, water, gas, wells, 2026, quarter, new, million, year, haynesville, infrastructure, cost, project, permian, company"
+    },
+    {
+        "cluster_id": 18,
+        "community_label": "2026 / management / revenue",
+        "community_size": 77,
+        "top_keywords": "2026, management, revenue, year, growth, expects, quarter, think, 2025, management expects, years, company, outlook, continue, improvement"
+    },
+    {
+        "cluster_id": 19,
+        "community_label": "management / impact / guidance",
+        "community_size": 93,
+        "top_keywords": "management, impact, guidance, material, does, current, new, changes, 2026, planned, reported, quarter, confirmed, financial, significant"
+    },
+    {
+        "cluster_id": 20,
+        "community_label": "guidance / management / 2026",
+        "community_size": 52,
+        "top_keywords": "guidance, management, 2026, year, financial, revenue, term, 2026 guidance, financial guidance, outlook, citing, guidance 2026, 2025, uncertainty, market"
+    },
+    {
+        "cluster_id": 21,
+        "community_label": "leverage / operating / margin",
+        "community_size": 25,
+        "top_keywords": "leverage, operating, margin, operating leverage, management, year, cost, half, second, improvements, expected, investments, company, ongoing, leverage expected"
+    },
+    {
+        "cluster_id": 22,
+        "community_label": "margin / gross / gross margin",
+        "community_size": 140,
+        "top_keywords": "margin, gross, gross margin, year, points, basis, basis points, operating, management, margins, higher, year year, mix, operating margin, points year"
+    },
+    {
+        "cluster_id": 23,
+        "community_label": "pipeline / management / new",
+        "community_size": 144,
+        "top_keywords": "pipeline, management, new, growth, year, 2026, project, billion, expected, battery, future, development, capital, company, opportunities"
+    },
+    {
+        "cluster_id": 24,
+        "community_label": "management / inventory / demand",
+        "community_size": 44,
+        "top_keywords": "management, inventory, demand, supply, market, described, sales, ongoing, quarter, pressure, growth, price, environment, term, pricing"
+    },
+    {
+        "cluster_id": 25,
+        "community_label": "headwind / headwinds / management",
+        "community_size": 95,
+        "top_keywords": "headwind, headwinds, management, year, million, margin, 2026, gross, expected, tariffs, guidance, impact, quarter, gross margin, revenue"
+    },
+    {
+        "cluster_id": 26,
+        "community_label": "middle / east / middle east",
+        "community_size": 56,
+        "top_keywords": "middle, east, middle east, management, conflict, ongoing, geopolitical, supply, uncertainty, disruptions, global, demand, market, prices, noted"
+    },
+    {
+        "cluster_id": 27,
+        "community_label": "inflation / price / cost",
+        "community_size": 27,
+        "top_keywords": "inflation, price, cost, increases, pricing, cost inflation, year, costs, inflationary, input, management, price increases, response, persistent, half"
+    },
+    {
+        "cluster_id": 28,
+        "community_label": "tariff / tariffs / management",
+        "community_size": 99,
+        "top_keywords": "tariff, tariffs, management, million, impact, cost, year, costs, 2026, ongoing, mitigation, exposure, pricing, margin, offset"
+    },
+    {
+        "cluster_id": 29,
+        "community_label": "expansion / new / growth",
+        "community_size": 63,
+        "top_keywords": "expansion, new, growth, international, capacity, management, international expansion, ongoing, support, margin, markets, diversification, geographic, term, future"
+    },
+    {
+        "cluster_id": 30,
+        "community_label": "leverage / net / net leverage",
+        "community_size": 29,
+        "top_keywords": "leverage, net, net leverage, ratio, leverage ratio, debt, target, company, ebitda, times, year, 3x, 5x, management, net debt"
+    },
+    {
+        "cluster_id": 31,
+        "community_label": "million / debt / refinancing",
+        "community_size": 42,
+        "top_keywords": "million, debt, refinancing, 2025, billion, notes, senior, term, balance, capital, balance sheet, cash, sheet, credit, q2"
+    },
+    {
+        "cluster_id": 32,
+        "community_label": "cash / million / cash flow",
+        "community_size": 218,
+        "top_keywords": "cash, million, cash flow, flow, year, free, free cash, quarter, capital, operating, end, working capital, working, 2025, operating cash"
+    },
+    {
+        "cluster_id": 33,
+        "community_label": "cloud / year / customer",
+        "community_size": 27,
+        "top_keywords": "cloud, year, customer, revenue, growth, platform, ai, key, expansion, rmb, billion, year year, rmb billion, app, partnership"
+    },
+    {
+        "cluster_id": 34,
+        "community_label": "growth / loan / guidance",
+        "community_size": 34,
+        "top_keywords": "growth, loan, guidance, 2026, management, loan growth, single, mid, expected, digit, single digit, mid single, income, year, deposit"
+    },
+    {
+        "cluster_id": 35,
+        "community_label": "management / acquisition / strategy",
+        "community_size": 129,
+        "top_keywords": "management, acquisition, strategy, growth, focus, opportunities, acquisitions, strategic, remains, market, activity, company, organic, ongoing, active"
+    },
+    {
+        "cluster_id": 36,
+        "community_label": "capital / balance / balance sheet",
+        "community_size": 59,
+        "top_keywords": "capital, balance, balance sheet, sheet, debt, company, cash, management, flexibility, ratio, growth, ongoing, future, leverage, equity"
+    },
+    {
+        "cluster_id": 37,
+        "community_label": "million / net / quarter",
+        "community_size": 59,
+        "top_keywords": "million, net, quarter, income, year, basis, net income, points, basis points, margin, net margin, sequentially, year year, 2025, prior"
+    },
+    {
+        "cluster_id": 38,
+        "community_label": "deposit / deposits / quarter",
+        "community_size": 62,
+        "top_keywords": "deposit, deposits, quarter, year, million, cost, growth, bearing, total, basis, management, 2025, costs, points, basis points"
+    },
+    {
+        "cluster_id": 39,
+        "community_label": "million / loans / loan",
+        "community_size": 178,
+        "top_keywords": "million, loans, loan, year, quarter, credit, portfolio, total, 2025, billion, q2, growth, year year, q2 2025, net"
+    },
+    {
+        "cluster_id": 40,
+        "community_label": "data / data center / center",
+        "community_size": 32,
+        "top_keywords": "data, data center, center, megawatts, new, capacity, power, demand, management, growth, year, customers, opportunities, solutions, customer"
+    },
+    {
+        "cluster_id": 41,
+        "community_label": "capital / management / allocation",
+        "community_size": 82,
+        "top_keywords": "capital, management, allocation, capital allocation, capital deployment, deployment, growth, organic, share, buybacks, opportunities, investment, focus, strategy, acquisitions"
+    },
+    {
+        "cluster_id": 42,
+        "community_label": "share / repurchases / repurchase",
+        "community_size": 139,
+        "top_keywords": "share, repurchases, repurchase, capital, million, share repurchases, share repurchase, management, shares, authorization, program, quarter, year, buybacks, buyback"
+    },
+    {
+        "cluster_id": 43,
+        "community_label": "dividend / share / capital",
+        "community_size": 120,
+        "top_keywords": "dividend, share, capital, return, cash, million, shareholder, management, dividends, returns, repurchases, shareholders, 2025, cash flow, flow"
+    },
+    {
+        "cluster_id": 44,
+        "community_label": "year / revenue / million",
+        "community_size": 25,
+        "top_keywords": "year, revenue, million, cloud, billion, year year, growth, services, ai, quarter, cloud revenue, total, total revenue, increase, aws"
+    },
+    {
+        "cluster_id": 45,
+        "community_label": "sales / declined / year",
+        "community_size": 43,
+        "top_keywords": "sales, declined, year, decline, pricing, segment, retail, pressure, 10, quarter, expected, year year, attributed, consumer, trends"
+    },
+    {
+        "cluster_id": 46,
+        "community_label": "new / growth / management",
+        "community_size": 83,
+        "top_keywords": "new, growth, management, product, expansion, engagement, value, brand, customer, focus, pricing, innovation, strategy, consumer, future"
+    },
+    {
+        "cluster_id": 47,
+        "community_label": "ai / management / product",
+        "community_size": 338,
+        "top_keywords": "ai, management, product, technology, efficiency, initiatives, new, operational, company, customer, platform, adoption, driven, revenue, ai driven"
+    },
+    {
+        "cluster_id": 48,
+        "community_label": "million / year / rmb",
+        "community_size": 26,
+        "top_keywords": "million, year, rmb, expenses, year year, net, revenue, billion, cash, 2025, operating, quarter, revenues, total, gaap"
+    },
+    {
+        "cluster_id": 49,
+        "community_label": "million / gaap / non gaap",
+        "community_size": 29,
+        "top_keywords": "million, gaap, non gaap, non, 2025, operating, year, q2, net, income, margin, q2 2025, share, expenses, q3"
+    },
+    {
+        "cluster_id": 50,
+        "community_label": "million / year / adjusted",
+        "community_size": 51,
+        "top_keywords": "million, year, adjusted, income, operating, quarter, net, adjusted operating, margin, net income, billion, operating income, revenue, share, year year"
+    },
+    {
+        "cluster_id": 51,
+        "community_label": "gaap / million / year",
+        "community_size": 198,
+        "top_keywords": "gaap, million, year, non, non gaap, share, operating, income, margin, quarter, net, gaap operating, year year, gross, net income"
+    },
+    {
+        "cluster_id": 52,
+        "community_label": "million / loss / year",
+        "community_size": 64,
+        "top_keywords": "million, loss, year, net, operating, share, net loss, quarter, prior, loss million, 000, adjusted, operating loss, prior year, compared"
+    },
+    {
+        "cluster_id": 53,
+        "community_label": "year / revenue / million",
+        "community_size": 88,
+        "top_keywords": "year, revenue, million, arr, year year, growth, billion, total, subscription, recurring, quarter, recurring revenue, non, saas, annual"
+    },
+    {
+        "cluster_id": 54,
+        "community_label": "million / expenses / year",
+        "community_size": 32,
+        "top_keywords": "million, expenses, year, operating, costs, expense, operating expenses, quarter, administrative, expense million, development, prior, 000, lower, higher"
+    },
+    {
+        "cluster_id": 55,
+        "community_label": "million / sg / year",
+        "community_size": 54,
+        "top_keywords": "million, sg, year, expenses, sales, expense, operating, costs, adjusted, revenue, higher, sg expenses, sg expense, year year, 000"
+    },
+    {
+        "cluster_id": 56,
+        "community_label": "q4 / q2 / q1",
+        "community_size": 77,
+        "top_keywords": "q4, q2, q1, management, q3, revenue, quarter, expected, growth, fiscal, 2026, seasonality, sequential, 2025, performance"
+    },
+    {
+        "cluster_id": 57,
+        "community_label": "sales / million / year",
+        "community_size": 49,
+        "top_keywords": "sales, million, year, restaurant, points, basis, basis points, lower, margin, profit, higher, costs, revenue, egg, net"
+    },
+    {
+        "cluster_id": 58,
+        "community_label": "year / revenue / million",
+        "community_size": 70,
+        "top_keywords": "year, revenue, million, year year, sequentially, fiber, growth, quarter, 000, data, total, segment, iot, net, data center"
+    },
+    {
+        "cluster_id": 59,
+        "community_label": "million / year / revenue",
+        "community_size": 74,
+        "top_keywords": "million, year, revenue, fy2025, fy2026, gaap, q2, margin, operating, year year, non, guidance, non gaap, adjusted, fiscal"
+    },
+    {
+        "cluster_id": 60,
+        "community_label": "year / revenue / million",
+        "community_size": 121,
+        "top_keywords": "year, revenue, million, segment, operating, year year, margin, segment revenue, sales, basis, billion, growth, increased, points, aerospace"
+    },
+    {
+        "cluster_id": 61,
+        "community_label": "revenue / year / million",
+        "community_size": 32,
+        "top_keywords": "revenue, year, million, advertising, year year, advertising revenue, segment, growth, increased, ad, cable, media, total, billion, driven"
+    },
+    {
+        "cluster_id": 62,
+        "community_label": "million / revenue / year",
+        "community_size": 57,
+        "top_keywords": "million, revenue, year, year year, quarter, total, total revenue, growth, services, sequentially, million year, 000, increase, reflecting, driven"
+    },
+    {
+        "cluster_id": 63,
+        "community_label": "million / q4 / year",
+        "community_size": 71,
+        "top_keywords": "million, q4, year, revenue, adjusted, margin, year year, ebitda, adjusted ebitda, basis, net, prior, million q4, loss, prior year"
+    },
+    {
+        "cluster_id": 64,
+        "community_label": "sales / million / net",
+        "community_size": 53,
+        "top_keywords": "sales, million, net, net sales, year, growth, segment, currency, increased, basis, quarter, year year, 2025, comparable, store"
+    },
+    {
+        "cluster_id": 65,
+        "community_label": "revenue / year / growth",
+        "community_size": 56,
+        "top_keywords": "revenue, year, growth, million, organic, year year, total, revenue growth, international, billion, currency, organic growth, organic revenue, sales, constant currency"
+    },
+    {
+        "cluster_id": 66,
+        "community_label": "ebitda / adjusted / margin",
+        "community_size": 51,
+        "top_keywords": "ebitda, adjusted, margin, adjusted ebitda, management, ebitda margin, year, target, term, 2026, expected, cost, margin target, million, 2025"
+    },
+    {
+        "cluster_id": 67,
+        "community_label": "million / year / ebitda",
+        "community_size": 269,
+        "top_keywords": "million, year, ebitda, adjusted, adjusted ebitda, margin, quarter, year year, revenue, segment, basis, 000, points, basis points, net"
+    },
+    {
+        "cluster_id": 68,
+        "community_label": "million / guidance / q4",
+        "community_size": 33,
+        "top_keywords": "million, guidance, q4, gaap, revenue, expected, year, non, non gaap, margin, 2025, operating, eps, q3, gross"
+    },
+    {
+        "cluster_id": 69,
+        "community_label": "million / guidance / q2",
+        "community_size": 27,
+        "top_keywords": "million, guidance, q2, revenue, year, billion, 2026, 2025, growth, margin, expected, q1, revenue guidance, midpoint, adjusted"
+    },
+    {
+        "cluster_id": 70,
+        "community_label": "million / guidance / adjusted",
+        "community_size": 116,
+        "top_keywords": "million, guidance, adjusted, ebitda, revenue, 2026, adjusted ebitda, year, billion, 2025, margin, growth, expected, ebitda guidance, revenue guidance"
+    },
+    {
+        "cluster_id": 71,
+        "community_label": "million / guidance / year",
+        "community_size": 93,
+        "top_keywords": "million, guidance, year, 2026, billion, revenue, growth, operating, expected, non, revenue guidance, income, midpoint, projected, gaap"
+    }
+]

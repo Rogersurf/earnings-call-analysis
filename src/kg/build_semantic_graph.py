@@ -33,8 +33,8 @@ INPUT_PATH = "outputs/chunks/semantic_chunks_embeddings.parquet"
 
 OUTPUT_DIR = "outputs/graph"
 
-TOP_K = 5
-SIMILARITY_THRESHOLD = 0.85
+TOP_K = 15
+SIMILARITY_THRESHOLD = 0.65
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
