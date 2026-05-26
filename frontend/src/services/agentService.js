@@ -1,26 +1,47 @@
-import API_BASE_URL from "./api";
+// ============================================================
+// FILE: frontend/src/services/agentService.js
+// ============================================================
 
-export async function fetchAgentExplanation(query) {
+import axios from "axios";
+
+// ============================================================
+// API URL
+// ============================================================
+
+const API_URL =
+    "http://localhost:8000";
+
+// ============================================================
+// FETCH AGENT INSIGHTS
+// ============================================================
+
+export async function fetchAgentInsights(
+
+    query
+) {
 
     try {
 
-        const response = await fetch(
-            `${API_BASE_URL}/agents/explain?query=${query}`
+        const response = await axios.post(
+
+            `${API_URL}/agents/query`,
+
+            {
+                query
+            }
         );
 
-        if (!response.ok) {
-            throw new Error("Agent request failed");
-        }
-
-        return await response.json();
+        return response.data;
 
     } catch (error) {
 
         console.error(
-            "Agent explanation error:",
+
+            "Agent service error:",
+
             error
         );
 
-        return null;
+        throw error;
     }
 }

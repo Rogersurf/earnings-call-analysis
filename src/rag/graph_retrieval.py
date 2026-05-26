@@ -1,408 +1,806 @@
 # ============================================================
 # FILE: src/rag/graph_retrieval.py
 # ============================================================
-#
-# PURPOSE:
-# Graph-aware semantic retrieval engine
-#
-# Combines:
-# - semantic similarity
-# - graph topology
-# - community relationships
-# - propagation candidates
-#
-# INPUTS:
-#
-# outputs/community_labeling/
-#   semantic_chunk_clusters_labeled.parquet
-#
-# outputs/graph/
-#   semantic_graph.gexf
-#
-# ============================================================
 
-import networkx as nx
+from pathlib import Path
+
+import re
 import numpy as np
 import pandas as pd
 
-from sentence_transformers import (
-    SentenceTransformer
-)
-
-from sklearn.metrics.pairwise import (
-    cosine_similarity
-)
-
-# ============================================================
-# CONFIG
-# ============================================================
-
-PARQUET_FILE = (
-    "outputs/community_labeling/"
-    "semantic_chunk_clusters_labeled.parquet"
-)
-
-GRAPH_FILE = (
-    "outputs/graph/"
-    "semantic_graph.gexf"
-)
-
-MODEL_NAME = (
-    "sentence-transformers/all-MiniLM-L6-v2"
-)
-
-TOP_K = 5
-
-GRAPH_NEIGHBORS = 5
-
-# ============================================================
-# LOAD DATA
-# ============================================================
-
-print("\n===================================================")
-print("LOADING DATA")
-print("===================================================\n")
-
-df = pd.read_parquet(
-    PARQUET_FILE
-)
-
-print(f"Dataset shape: {df.shape}")
-
-# ============================================================
-# VALIDATION
-# ============================================================
-
-required_columns = [
-
-    "chunk_text",
-    "embedding",
-    "company",
-    "ticker",
-    "community_label"
-
-]
-
-missing_columns = [
-
-    c for c in required_columns
-
-    if c not in df.columns
-]
-
-if missing_columns:
-
-    raise ValueError(
-        f"Missing columns: {missing_columns}"
-    )
-
-# ============================================================
-# LOAD EMBEDDINGS
-# ============================================================
-
-print("\n===================================================")
-print("LOADING EMBEDDINGS")
-print("===================================================\n")
-
-embeddings = np.vstack(
-    df["embedding"].values
-)
-
-print(
-    f"Embeddings shape: "
-    f"{embeddings.shape}"
-)
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
 
 # ============================================================
 # LOAD MODEL
 # ============================================================
 
-print("\n===================================================")
-print("LOADING SBERT")
-print("===================================================\n")
-
 model = SentenceTransformer(
-    MODEL_NAME
+    "sentence-transformers/all-MiniLM-L6-v2"
 )
 
 # ============================================================
-# LOAD GRAPH
+# LOAD DATA
 # ============================================================
 
-print("\n===================================================")
-print("LOADING GRAPH")
-print("===================================================\n")
-
-G = nx.read_gexf(
-    GRAPH_FILE
+DATA_PATH = Path(
+    "outputs/chunks/semantic_chunks_embeddings.parquet"
 )
 
-print(
-    f"Graph nodes: "
-    f"{G.number_of_nodes():,}"
-)
+df = pd.read_parquet(DATA_PATH)
 
-print(
-    f"Graph edges: "
-    f"{G.number_of_edges():,}"
+# ============================================================
+# PREPARE EMBEDDINGS
+# ============================================================
+
+embeddings_matrix = np.vstack(
+    df["embedding"].values
 )
 
 # ============================================================
-# SEMANTIC RETRIEVAL
+# THEMATIC KEYWORDS
+# ============================================================
+
+THEMATIC_KEYWORDS = {
+
+    "ai": [
+        "ai",
+        "artificial intelligence",
+        "machine learning",
+        "llm",
+        "foundation model",
+        "inference"
+    ],
+
+    "infrastructure": [
+        "datacenter",
+        "data center",
+        "cloud",
+        "compute",
+        "gpu",
+        "server",
+        "infrastructure"
+    ],
+
+    "energy": [
+        "utilities",
+        "electricity",
+        "power",
+        "grid",
+        "energy demand"
+    ],
+
+    "semiconductors": [
+        "nvidia",
+        "amd",
+        "chip",
+        "chips",
+        "gpu",
+        "semiconductor"
+    ],
+
+    "supply_chain": [
+        "china",
+        "manufacturing",
+        "logistics",
+        "exports",
+        "sourcing"
+    ]
+}
+
+# ============================================================
+# NORMALIZE TEXT
+# ============================================================
+
+def normalize_text(text):
+
+    if pd.isna(text):
+        return ""
+
+    text = str(text).lower()
+
+    text = re.sub(
+        r"[^a-zA-Z0-9\s]",
+        "",
+        text
+    )
+
+    return text
+
+# ============================================================
+# EXTRACT THEMES
+# ============================================================
+
+def extract_themes(text):
+
+    text = normalize_text(text)
+
+    themes_found = set()
+
+    for theme, keywords in THEMATIC_KEYWORDS.items():
+
+        for keyword in keywords:
+
+            if keyword in text:
+
+                themes_found.add(theme)
+
+    return themes_found
+
+# ============================================================
+# COMPUTE THEMATIC OVERLAP
+# ============================================================
+
+def compute_thematic_overlap(
+
+    source_text,
+    target_text
+):
+
+    source_themes = extract_themes(
+        source_text
+    )
+
+    target_themes = extract_themes(
+        target_text
+    )
+
+    overlap = (
+        source_themes
+        &
+        target_themes
+    )
+
+    return len(overlap)
+
+# ============================================================
+# SEMANTIC SEARCH
 # ============================================================
 
 def semantic_search(
-    query,
-    top_k=TOP_K
+
+    query: str,
+
+    top_k: int = 10
 ):
 
-    print("\n===================================================")
-    print("SEMANTIC SEARCH")
-    print("===================================================\n")
-
-    print(f"Query: {query}")
-
-    # --------------------------------------------------------
-    # EMBED QUERY
-    # --------------------------------------------------------
-
-    query_embedding = model.encode(
-        [query]
-    )
-
-    # --------------------------------------------------------
-    # COSINE SIMILARITY
-    # --------------------------------------------------------
+    query_embedding = model.encode([query])
 
     similarities = cosine_similarity(
 
         query_embedding,
-        embeddings
+        embeddings_matrix
 
     )[0]
 
-    # --------------------------------------------------------
-    # TOP RESULTS
-    # --------------------------------------------------------
-
-    top_indices = similarities.argsort(
-    )[::-1][:top_k]
+    top_indices = (
+        similarities
+        .argsort()[-top_k:]
+        [::-1]
+    )
 
     results = []
 
-    for rank, idx in enumerate(top_indices):
+    for idx in top_indices:
 
         row = df.iloc[idx]
 
-        result = {
+        results.append({
 
-            "node_id":
-                str(idx),
-
-            "rank":
-                rank + 1,
-
-            "similarity":
-                float(
-                    similarities[idx]
-                ),
+            "index":
+                int(idx),
 
             "company":
-                row.get(
-                    "company",
-                    ""
-                ),
+                row.get("company", ""),
 
             "ticker":
-                row.get(
-                    "ticker",
-                    ""
-                ),
+                row.get("ticker", ""),
 
-            "community":
-                row.get(
-                    "community_label",
-                    "unclassified"
-                ),
+            "sector":
+                row.get("sector", ""),
 
-            "chunk":
-                row.get(
-                    "chunk_text",
-                    ""
-                )[:1000]
-        }
+            "source_layer":
+                row.get("source_layer", ""),
 
-        results.append(result)
+            "chunk_text":
+                row.get("chunk_text", ""),
+
+            "similarity":
+                float(similarities[idx])
+        })
 
     return results
 
 # ============================================================
-# GRAPH NEIGHBORS
+# RETRIEVE GRAPH CONTEXT
 # ============================================================
 
-def get_graph_neighbors(
-    node_id,
-    max_neighbors=GRAPH_NEIGHBORS
+def retrieve_graph_context(
+
+    query: str,
+
+    top_k_chunks: int = 5,
+
+    neighbors_per_chunk: int = 5,
+
+    min_similarity: float = 0.55
 ):
 
-    neighbors = []
+    # ========================================================
+    # INITIAL RETRIEVAL
+    # ========================================================
 
-    if node_id not in G:
+    retrieved_chunks = semantic_search(
 
-        return neighbors
+        query=query,
 
-    for neighbor in G.neighbors(node_id):
-
-        edge_data = G.get_edge_data(
-            node_id,
-            neighbor
-        )
-
-        weight = edge_data.get(
-            "weight",
-            0
-        )
-
-        neighbors.append({
-
-            "neighbor_id":
-                neighbor,
-
-            "weight":
-                float(weight)
-        })
-
-    neighbors = sorted(
-
-        neighbors,
-
-        key=lambda x: x["weight"],
-
-        reverse=True
+        top_k=top_k_chunks
     )
 
-    return neighbors[:max_neighbors]
+    # ========================================================
+    # GRAPH STRUCTURES
+    # ========================================================
 
-# ============================================================
-# DISPLAY RESULTS
-# ============================================================
+    nodes = {}
 
-def display_results(results):
+    edges = []
 
-    print("\n===================================================")
-    print("TOP SEMANTIC RESULTS")
-    print("===================================================\n")
+    edge_ids = set()
 
-    for r in results:
+    # ========================================================
+    # PROCESS RETRIEVED CHUNKS
+    # ========================================================
 
-        print(
-            f"\nRANK: {r['rank']}"
+    for chunk in retrieved_chunks:
+
+        source_idx = chunk["index"]
+
+        source_row = df.iloc[source_idx]
+
+        source_embedding = np.array(
+            source_row["embedding"]
+        ).reshape(1, -1)
+
+        source_text = source_row.get(
+            "chunk_text",
+            ""
         )
 
-        print(
-            f"SIMILARITY: "
-            f"{r['similarity']:.4f}"
+        source_sector = source_row.get(
+            "sector",
+            ""
         )
 
-        print(
-            f"COMPANY: "
-            f"{r['company']}"
+        source_company = source_row.get(
+            "company",
+            ""
         )
 
-        print(
-            f"TICKER: "
-            f"{r['ticker']}"
+        source_ticker = source_row.get(
+            "ticker",
+            ""
         )
 
-        print(
-            f"COMMUNITY: "
-            f"{r['community']}"
+        source_id = str(source_idx)
+
+        # ====================================================
+        # SOURCE NODE
+        # ====================================================
+
+        if source_id not in nodes:
+
+            nodes[source_id] = {
+
+                "id":
+                    source_id,
+
+                "type":
+                    "source",
+
+                "position": {
+
+                    "x":
+                        int(len(nodes) * 250),
+
+                    "y":
+                        100,
+                },
+
+                "data": {
+
+                    "company":
+                        source_company,
+
+                    "ticker":
+                        source_ticker,
+
+                    "sector":
+                        source_sector,
+
+                    "label":
+                        f"{source_company} ({source_ticker})",
+
+                    "chunk":
+                        source_text[:300],
+
+                    "themes":
+                        list(
+                            extract_themes(
+                                source_text
+                            )
+                        ),
+
+                    "similarity":
+                        float(chunk["similarity"])
+                }
+            }
+
+        # ====================================================
+        # FIRST-ORDER NEIGHBORS
+        # ====================================================
+
+        similarities = cosine_similarity(
+
+            source_embedding,
+            embeddings_matrix
+
+        )[0]
+
+        neighbor_indices = (
+
+            similarities
+            .argsort()[-neighbors_per_chunk - 1:]
+            [::-1]
         )
 
-        print("\nCHUNK:\n")
+        for neighbor_idx in neighbor_indices:
 
-        print(r["chunk"])
-
-        # ----------------------------------------------------
-        # GRAPH NEIGHBORS
-        # ----------------------------------------------------
-
-        neighbors = get_graph_neighbors(
-            r["node_id"]
-        )
-
-        print("\nGRAPH NEIGHBORS:\n")
-
-        if not neighbors:
-
-            print("No graph neighbors found.")
-
-        for n in neighbors:
-
-            try:
-
-                neighbor_row = df.iloc[
-                    int(n["neighbor_id"])
-                ]
-
-                print(
-                    f"- "
-                    f"{neighbor_row['company']} "
-                    f"({neighbor_row['ticker']}) "
-                    f"| weight="
-                    f"{n['weight']:.4f}"
-                )
-
-            except:
-
+            if neighbor_idx == source_idx:
                 continue
 
-        print("\n" + "=" * 70)
+            semantic_similarity = (
+                similarities[neighbor_idx]
+            )
+
+            if semantic_similarity < min_similarity:
+                continue
+
+            neighbor_row = df.iloc[neighbor_idx]
+
+            target_text = neighbor_row.get(
+                "chunk_text",
+                ""
+            )
+
+            target_sector = neighbor_row.get(
+                "sector",
+                ""
+            )
+
+            target_company = neighbor_row.get(
+                "company",
+                ""
+            )
+
+            target_ticker = neighbor_row.get(
+                "ticker",
+                ""
+            )
+
+            thematic_overlap = (
+                compute_thematic_overlap(
+
+                    source_text,
+                    target_text
+                )
+            )
+
+            cross_sector = (
+                source_sector != target_sector
+            )
+
+            hybrid_score = (
+                semantic_similarity
+                +
+                (thematic_overlap * 0.08)
+                +
+                (
+                    0.05
+                    if cross_sector
+                    else 0
+                )
+            )
+
+            if hybrid_score < 0.65:
+                continue
+
+            target_id = str(neighbor_idx)
+
+            # =================================================
+            # TARGET NODE
+            # =================================================
+
+            if target_id not in nodes:
+
+                nodes[target_id] = {
+
+                    "id":
+                        target_id,
+
+                    "type":
+                        "neighbor",
+
+                    "position": {
+
+                        "x":
+                            int(len(nodes) * 220),
+
+                        "y":
+                            400,
+                    },
+
+                    "data": {
+
+                        "company":
+                            target_company,
+
+                        "ticker":
+                            target_ticker,
+
+                        "sector":
+                            target_sector,
+
+                        "label":
+                            (
+                                f"{target_company} "
+                                f"({target_ticker})"
+                            ),
+
+                        "chunk":
+                            target_text[:300],
+
+                        "themes":
+                            list(
+                                extract_themes(
+                                    target_text
+                                )
+                            ),
+
+                        "similarity":
+                            float(
+                                semantic_similarity
+                            )
+                    }
+                }
+
+            # =================================================
+            # EDGE
+            # =================================================
+
+            edge_id = (
+                f"{source_id}-{target_id}"
+            )
+
+            reverse_edge_id = (
+                f"{target_id}-{source_id}"
+            )
+
+            if (
+                edge_id in edge_ids
+                or
+                reverse_edge_id in edge_ids
+            ):
+                continue
+
+            edge_ids.add(edge_id)
+
+            edges.append({
+
+                "id":
+                    edge_id,
+
+                "source":
+                    source_id,
+
+                "target":
+                    target_id,
+
+                "animated":
+                    False,
+
+                "data": {
+
+                    "semantic_similarity":
+                        float(
+                            semantic_similarity
+                        ),
+
+                    "hybrid_score":
+                        float(
+                            hybrid_score
+                        ),
+
+                    "thematic_overlap":
+                        int(
+                            thematic_overlap
+                        ),
+
+                    "cross_sector":
+                        bool(
+                            cross_sector
+                        ),
+
+                    "edge_type":
+                        "first_order"
+                }
+            })
+
+            # =================================================
+            # SECOND-ORDER EXPANSION
+            # =================================================
+
+            neighbor_embedding = np.array(
+
+                neighbor_row["embedding"]
+
+            ).reshape(1, -1)
+
+            neighbor_similarities = cosine_similarity(
+
+                neighbor_embedding,
+                embeddings_matrix
+
+            )[0]
+
+            second_order_indices = (
+
+                neighbor_similarities
+                .argsort()[-4:]
+                [::-1]
+            )
+
+            for second_idx in second_order_indices:
+
+                if second_idx in [
+
+                    source_idx,
+                    neighbor_idx
+                ]:
+                    continue
+
+                second_similarity = (
+                    neighbor_similarities[
+                        second_idx
+                    ]
+                )
+
+                if second_similarity < 0.60:
+                    continue
+
+                second_row = df.iloc[
+                    second_idx
+                ]
+
+                second_id = str(second_idx)
+
+                # =============================================
+                # SECOND-ORDER NODE
+                # =============================================
+
+                if second_id not in nodes:
+
+                    nodes[second_id] = {
+
+                        "id":
+                            second_id,
+
+                        "type":
+                            "second_order",
+
+                        "position": {
+
+                            "x":
+                                int(
+                                    len(nodes) * 180
+                                ),
+
+                            "y":
+                                700,
+                        },
+
+                        "data": {
+
+                            "company":
+                                second_row.get(
+                                    "company",
+                                    ""
+                                ),
+
+                            "ticker":
+                                second_row.get(
+                                    "ticker",
+                                    ""
+                                ),
+
+                            "sector":
+                                second_row.get(
+                                    "sector",
+                                    ""
+                                ),
+
+                            "label":
+                                (
+                                    f"{second_row.get('company', '')} "
+                                    f"({second_row.get('ticker', '')})"
+                                ),
+
+                            "chunk":
+                                second_row.get(
+                                    "chunk_text",
+                                    ""
+                                )[:300],
+
+                            "themes":
+                                list(
+
+                                    extract_themes(
+
+                                        second_row.get(
+                                            "chunk_text",
+                                            ""
+                                        )
+                                    )
+                                ),
+
+                            "similarity":
+                                float(
+                                    second_similarity
+                                )
+                        }
+                    }
+
+                # =============================================
+                # SECOND-ORDER EDGE
+                # =============================================
+
+                second_edge_id = (
+                    f"{target_id}-{second_id}"
+                )
+
+                reverse_second_edge_id = (
+                    f"{second_id}-{target_id}"
+                )
+
+                if (
+
+                    second_edge_id in edge_ids
+
+                    or
+
+                    reverse_second_edge_id in edge_ids
+                ):
+                    continue
+
+                edge_ids.add(
+                    second_edge_id
+                )
+
+                edges.append({
+
+                    "id":
+                        second_edge_id,
+
+                    "source":
+                        target_id,
+
+                    "target":
+                        second_id,
+
+                    "animated":
+                        False,
+
+                    "data": {
+
+                        "semantic_similarity":
+                            float(
+                                second_similarity
+                            ),
+
+                        "edge_type":
+                            "second_order"
+                    }
+                })
+
+    # ========================================================
+    # GLOBAL THEMES
+    # ========================================================
+
+    all_themes = []
+
+    for node in nodes.values():
+
+        node_themes = (
+            node["data"]
+            .get("themes", [])
+        )
+
+        all_themes.extend(node_themes)
+
+    unique_themes = sorted(
+        list(set(all_themes))
+    )
+
+    # ========================================================
+    # RETURN GRAPH
+    # ========================================================
+
+    return {
+
+        "query":
+            query,
+
+        "themes":
+            unique_themes,
+
+        "num_nodes":
+            len(nodes),
+
+        "num_edges":
+            len(edges),
+
+        "nodes":
+            list(nodes.values()),
+
+        "edges":
+            edges
+    }
 
 # ============================================================
-# INTERACTIVE LOOP
+# TEST
 # ============================================================
 
 if __name__ == "__main__":
 
+    query = "AI infrastructure demand"
+
+    graph = retrieve_graph_context(
+
+        query=query,
+
+        top_k_chunks=5,
+
+        neighbors_per_chunk=5
+    )
+
     print("\n===================================================")
-    print("GRAPH-AWARE SEMANTIC RETRIEVAL")
+    print("DYNAMIC GRAPH RETRIEVAL")
     print("===================================================\n")
 
-    while True:
+    print(f"Query: {query}")
 
-        query = input(
-            "\nEnter query "
-            "(or 'exit'): "
+    print(f"Nodes: {graph['num_nodes']}")
+
+    print(f"Edges: {graph['num_edges']}")
+
+    print(f"Themes: {graph['themes']}")
+
+    print("\n===================================================\n")
+
+    print("Sample Nodes:\n")
+
+    for node in graph["nodes"][:5]:
+
+        print(node["data"]["label"])
+
+    print("\n===================================================\n")
+
+    print("Sample Edges:\n")
+
+    for edge in graph["edges"][:5]:
+
+        print(
+
+            edge["source"],
+            "->",
+            edge["target"]
         )
-
-        # ----------------------------------------------------
-        # EXIT
-        # ----------------------------------------------------
-
-        if query.lower() == "exit":
-
-            print("\nExiting...\n")
-
-            break
-
-        # ----------------------------------------------------
-        # EMPTY QUERY
-        # ----------------------------------------------------
-
-        if not query.strip():
-
-            print("\nEmpty query.\n")
-
-            continue
-
-        # ----------------------------------------------------
-        # SEARCH
-        # ----------------------------------------------------
-
-        results = semantic_search(
-            query=query,
-            top_k=TOP_K
-        )
-
-        display_results(results)

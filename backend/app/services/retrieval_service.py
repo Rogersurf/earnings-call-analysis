@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import re
 import numpy as np
 import pandas as pd
 
@@ -33,34 +34,251 @@ embeddings_matrix = np.vstack(
 )
 
 # ======================================================
+# ENTITY / DOMAIN SYNONYMS
+# ======================================================
+
+ENTITY_SYNONYMS = {
+
+    "ai": [
+        "artificial intelligence",
+        "machine learning",
+        "llm",
+        "foundation model",
+        "generative ai"
+    ],
+
+    "datacenter": [
+        "data center",
+        "cloud",
+        "hyperscale",
+        "infrastructure",
+        "compute"
+    ],
+
+    "energy": [
+        "utilities",
+        "electricity",
+        "power",
+        "grid"
+    ],
+
+    "semiconductor": [
+        "gpu",
+        "chip",
+        "nvidia",
+        "amd"
+    ],
+
+    "china": [
+        "chinese",
+        "asia",
+        "manufacturing",
+        "sourcing"
+    ],
+
+    "brazil": [
+        "brazilian",
+        "latam",
+        "latin america"
+    ]
+}
+
+# ======================================================
+# QUERY NORMALIZATION
+# ======================================================
+
+def normalize_text(text: str):
+
+    text = text.lower()
+
+    text = re.sub(
+        r"[^a-zA-Z0-9\s]",
+        "",
+        text
+    )
+
+    return text
+
+# ======================================================
+# KEYWORD EXTRACTION
+# ======================================================
+
+def extract_keywords(query: str):
+
+    query = normalize_text(query)
+
+    return query.split()
+
+# ======================================================
+# KEYWORD BOOST
+# ======================================================
+
+def compute_keyword_boost(
+
+    query_keywords,
+    chunk_text,
+):
+
+    chunk_text = normalize_text(chunk_text)
+
+    boost = 0.0
+
+    for keyword in query_keywords:
+
+        if keyword in chunk_text:
+
+            boost += 0.05
+
+    return boost
+
+# ======================================================
+# ENTITY BOOST
+# ======================================================
+
+def compute_entity_boost(
+
+    query_keywords,
+    chunk_text,
+):
+
+    chunk_text = normalize_text(chunk_text)
+
+    boost = 0.0
+
+    for keyword in query_keywords:
+
+        if keyword not in ENTITY_SYNONYMS:
+            continue
+
+        synonyms = ENTITY_SYNONYMS[keyword]
+
+        for synonym in synonyms:
+
+            synonym = normalize_text(synonym)
+
+            if synonym in chunk_text:
+
+                boost += 0.08
+
+    return boost
+
+# ======================================================
+# HYBRID SCORE
+# ======================================================
+
+def compute_hybrid_score(
+
+    semantic_score,
+    keyword_score,
+    entity_score,
+):
+
+    return (
+        semantic_score
+        + keyword_score
+        + entity_score
+    )
+
+# ======================================================
 # SEMANTIC SEARCH
 # ======================================================
 
 def semantic_search(
+
     query: str,
+
     top_k: int = 10
 ):
 
     # ==============================================
-    # ENCODE QUERY
+    # NORMALIZE QUERY
     # ==============================================
 
-    query_embedding = model.encode([query])
+    normalized_query = normalize_text(query)
+
+    query_keywords = extract_keywords(
+        normalized_query
+    )
 
     # ==============================================
-    # COSINE SIMILARITY
+    # QUERY EMBEDDING
     # ==============================================
 
-    similarities = cosine_similarity(
+    query_embedding = model.encode(
+        [normalized_query]
+    )
+
+    # ==============================================
+    # SEMANTIC SIMILARITIES
+    # ==============================================
+
+    semantic_scores = cosine_similarity(
+
         query_embedding,
         embeddings_matrix
+
     )[0]
+
+    # ==============================================
+    # HYBRID SCORING
+    # ==============================================
+
+    hybrid_scores = []
+
+    for idx, semantic_score in enumerate(
+        semantic_scores
+    ):
+
+        row = df.iloc[idx]
+
+        chunk_text = row["chunk_text"]
+
+        # ------------------------------------------
+        # KEYWORD BOOST
+        # ------------------------------------------
+
+        keyword_score = compute_keyword_boost(
+
+            query_keywords,
+            chunk_text
+        )
+
+        # ------------------------------------------
+        # ENTITY BOOST
+        # ------------------------------------------
+
+        entity_score = compute_entity_boost(
+
+            query_keywords,
+            chunk_text
+        )
+
+        # ------------------------------------------
+        # FINAL SCORE
+        # ------------------------------------------
+
+        final_score = compute_hybrid_score(
+
+            semantic_score=semantic_score,
+
+            keyword_score=keyword_score,
+
+            entity_score=entity_score,
+        )
+
+        hybrid_scores.append(final_score)
+
+    hybrid_scores = np.array(hybrid_scores)
 
     # ==============================================
     # TOP RESULTS
     # ==============================================
 
-    top_indices = similarities.argsort()[-top_k:][::-1]
+    top_indices = (
+        hybrid_scores
+        .argsort()[-top_k:]
+        [::-1]
+    )
 
     results = []
 
@@ -82,9 +300,11 @@ def semantic_search(
             "chunk_text":
                 row["chunk_text"],
 
-            "similarity":
-                float(similarities[idx])
+            "semantic_score":
+                float(semantic_scores[idx]),
 
+            "hybrid_score":
+                float(hybrid_scores[idx])
         })
 
     return results
@@ -97,46 +317,52 @@ def semantic_graph_expansion(
 
     query: str,
 
-    top_k: int = 3,
+    top_k: int = 5,
 
-    neighbors_per_chunk: int = 2,
+    neighbors_per_chunk: int = 5,
 ):
 
     # ==============================================
-    # QUERY EMBEDDING
+    # RETRIEVE TOP RESULTS
     # ==============================================
 
-    query_embedding = model.encode([query])
+    search_results = semantic_search(
 
-    # ==============================================
-    # QUERY SIMILARITIES
-    # ==============================================
+        query=query,
 
-    similarities = cosine_similarity(
-        query_embedding,
-        embeddings_matrix
-    )[0]
-
-    # ==============================================
-    # TOP QUERY MATCHES
-    # ==============================================
-
-    top_indices = similarities.argsort()[-top_k:][::-1]
+        top_k=top_k
+    )
 
     # ==============================================
     # GRAPH STRUCTURES
     # ==============================================
 
     nodes = {}
+
     edges = []
 
     # ==============================================
-    # EXPAND EACH MATCH
+    # BUILD GRAPH
     # ==============================================
 
-    for idx in top_indices:
+    for result in search_results:
 
-        row = df.iloc[idx]
+        # ------------------------------------------
+        # FIND MATCHING ROW
+        # ------------------------------------------
+
+        matching_rows = df[
+            df["chunk_text"]
+            ==
+            result["chunk_text"]
+        ]
+
+        if len(matching_rows) == 0:
+            continue
+
+        idx = matching_rows.index[0]
+
+        row = df.loc[idx]
 
         source_id = str(int(idx))
 
@@ -154,8 +380,11 @@ def semantic_graph_expansion(
 
             "position": {
 
-                "x": int(idx % 5 * 250),
-                "y": int(idx // 5 * 200),
+                "x":
+                    int(idx % 5 * 250),
+
+                "y":
+                    int(idx // 5 * 200),
             },
 
             "data": {
@@ -165,6 +394,9 @@ def semantic_graph_expansion(
 
                 "chunk":
                     row["chunk_text"][:120],
+
+                "score":
+                    float(result["hybrid_score"])
             }
         }
 
@@ -186,6 +418,10 @@ def semantic_graph_expansion(
             embeddings_matrix
 
         )[0]
+
+        # ------------------------------------------
+        # TOP NEIGHBORS
+        # ------------------------------------------
 
         neighbor_indices = (
             neighbor_scores
@@ -256,6 +492,9 @@ def semantic_graph_expansion(
 
                 "animated":
                     False,
+
+                "similarity":
+                    float(neighbor_scores[neighbor_idx])
             })
 
     # ==============================================
@@ -270,3 +509,38 @@ def semantic_graph_expansion(
         "edges":
             edges,
     }
+
+# ======================================================
+# TEST
+# ======================================================
+
+if __name__ == "__main__":
+
+    query = "AI infrastructure demand"
+
+    results = semantic_search(query)
+
+    print("\n" + "=" * 60)
+    print(f"QUERY: {query}")
+    print("=" * 60)
+
+    for r in results[:5]:
+
+        print("\n")
+
+        print(f"Company: {r['company']}")
+        print(f"Ticker: {r['ticker']}")
+
+        print(
+            f"Hybrid Score: "
+            f"{r['hybrid_score']:.4f}"
+        )
+
+        print(
+            f"Semantic Score: "
+            f"{r['semantic_score']:.4f}"
+        )
+
+        print("-" * 60)
+
+        print(r["chunk_text"][:300])

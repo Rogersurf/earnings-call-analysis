@@ -1,25 +1,53 @@
-const API_URL =
-  "http://127.0.0.1:8000";
+// ============================================================
+// FILE: frontend/src/services/graphService.js
+// ============================================================
 
-export async function fetchGraph(query) {
+import axios from "axios";
 
-  try {
+// ============================================================
+// API BASE URL
+// ============================================================
 
-    const response = await fetch(
+const API_BASE_URL = "http://localhost:8000";
 
-      `${API_URL}/graph/propagation?query=${encodeURIComponent(query)}`
+// ============================================================
+// QUERY GRAPH
+// ============================================================
 
-    );
+export async function fetchQueryGraph(
 
-    return await response.json();
+    query,
 
-  } catch (error) {
+    top_k_chunks = 5,
 
-    console.error(
-      "Graph fetch error:",
-      error
-    );
+    neighbors_per_chunk = 5
+) {
 
-    return null;
-  }
+    try {
+
+        const response = await axios.post(
+
+            `${API_BASE_URL}/graph/query`,
+
+            {
+
+                query,
+
+                top_k_chunks,
+
+                neighbors_per_chunk
+            }
+        );
+
+        return response.data;
+
+    } catch (error) {
+
+        console.error(
+            "Graph retrieval error:",
+            error
+        );
+
+        throw error;
+    }
 }

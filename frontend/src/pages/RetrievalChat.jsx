@@ -1,288 +1,335 @@
-import { useState } from "react";
+// ============================================================
+// FILE: frontend/src/pages/RetrievalChat.jsx
+// ============================================================
+
+import React, {
+
+    useState
+
+} from "react";
+
+import RetrievalPanel
+    from "../components/retrieval/RetrievalPanel";
+
+import SemanticGraph from "../components/graph/SemanticGraph";
+
+import NodeDetailsPanel from "../components/graph/NodeDetailsPanel";
 
 import {
-  searchSemantic
-} from "../services/retrievalService";
 
-import {
-  fetchGraph
+    fetchQueryGraph
+
 } from "../services/graphService";
 
-import PropagationGraph from
-  "../components/graph/PropagationGraph";
+import AgentPanel from "../components/agents/AgentPanel";
+
+import {
+
+    fetchAgentInsights
+
+} from "../services/agentService";
+
+// ============================================================
+// COMPONENT
+// ============================================================
 
 export default function RetrievalChat() {
 
-  // ==================================================
-  // STATES
-  // ==================================================
+    // ========================================================
+    // STATE
+    // ========================================================
 
-  const [query, setQuery] =
-    useState("");
+    const [query, setQuery] = useState("");
 
-  const [results, setResults] =
-    useState([]);
+    const [loading, setLoading] = useState(false);
 
-  const [graphData, setGraphData] =
-    useState(null);
+    const [selectedNode, setSelectedNode] = useState(null);
 
-  const [loading, setLoading] =
-    useState(false);
+    const [graphData, setGraphData] = useState({
 
-  // ==================================================
-  // HANDLE SEND
-  // ==================================================
+        nodes: [],
+        edges: [],
+        themes: []
+    });
 
-  async function handleSend() {
+    const [agentInsights, setAgentInsights] = useState([]);
 
-    if (!query.trim()) return;
+    // ========================================================
+    // SEARCH
+    // ========================================================
 
-    setLoading(true);
+    async function handleSearch() {
 
-    try {
+        if (!query.trim()) {
+            return;
+        }
 
-      // ----------------------------------------------
-      // RETRIEVAL RESULTS
-      // ----------------------------------------------
+        try {
 
-      const retrievalData =
-        await searchSemantic(query);
+            setLoading(true);
 
-      if (retrievalData?.results) {
+            // ====================================================
+            // GRAPH QUERY
+            // ====================================================
 
-        setResults(
-          retrievalData.results
-        );
-      }
+            const data = await fetchQueryGraph(
 
-      // ----------------------------------------------
-      // GRAPH EXPANSION
-      // ----------------------------------------------
+                query,
 
-      const graph =
-        await fetchGraph(query);
+                5,
 
-      if (graph?.results) {
+                5
+            );
 
-        setGraphData(
-          graph.results
-        );
-      }
+            setGraphData({
 
-    } catch (error) {
+                nodes: data.nodes || [],
 
-      console.error(error);
+                edges: data.edges || [],
 
-    } finally {
+                themes: data.themes || []
+            });
 
-      setLoading(false);
+            // ====================================================
+            // AGENT QUERY
+            // ====================================================
+
+            const agentResponse =
+                await fetchAgentInsights(
+                    query
+                );
+
+            setAgentInsights(
+
+                agentResponse.agents || []
+            );
+
+        } catch (error) {
+
+            console.error(error);
+
+        } finally {
+
+            setLoading(false);
+        }
     }
-  }
 
-  // ==================================================
-  // UI
-  // ==================================================
+    // ========================================================
+    // NODE CLICK
+    // ========================================================
 
-  return (
+    function handleNodeClick(event, node) {
 
-    <div
-      className="
-        min-h-screen
-        bg-black
-        text-white
-        p-8
-      "
-    >
+        setSelectedNode(node);
+    }
 
-      {/* ========================================= */}
-      {/* TITLE */}
-      {/* ========================================= */}
+    // ========================================================
+    // RENDER
+    // ========================================================
 
-      <h1
-        className="
-          text-4xl
-          font-bold
-          mb-8
-        "
-      >
-        Semantic Intelligence Platform
-      </h1>
+    return (
 
-      {/* ========================================= */}
-      {/* INPUT */}
-      {/* ========================================= */}
-
-      <div
-        className="
-          flex
-          gap-4
-          mb-10
-        "
-      >
-
-        <input
-
-          type="text"
-
-          value={query}
-
-          onChange={(e) =>
-            setQuery(e.target.value)
-          }
-
-          placeholder="
-            Explore semantic narratives...
-          "
-
-          className="
-            flex-1
-            bg-zinc-900
-            border
-            border-zinc-700
-            rounded-2xl
-            px-6
-            py-4
+        <div className="
+            w-full
+            h-screen
+            bg-zinc-950
             text-white
-            outline-none
-          "
-        />
+            flex
+            flex-col
+        ">
 
-        <button
+            {/* ================================================= */}
+            {/* TOP BAR */}
+            {/* ================================================= */}
 
-          onClick={handleSend}
-
-          className="
-            bg-cyan-500
-            hover:bg-cyan-400
-            text-black
-            font-bold
-            px-8
-            rounded-2xl
-          "
-        >
-          Search
-        </button>
-
-      </div>
-
-      {/* ========================================= */}
-      {/* LOADING */}
-      {/* ========================================= */}
-
-      {loading && (
-
-        <p
-          className="
-            text-zinc-400
-            mb-6
-          "
-        >
-          Building semantic graph...
-        </p>
-      )}
-
-      {/* ========================================= */}
-      {/* RETRIEVAL RESULTS */}
-      {/* ========================================= */}
-
-      <div
-        className="
-          grid
-          gap-6
-        "
-      >
-
-        {results.map((result, idx) => (
-
-          <div
-
-            key={idx}
-
-            className="
-              bg-zinc-900
-              border
-              border-zinc-800
-              rounded-3xl
-              p-6
-            "
-          >
-
-            <div
-              className="
+            <div className="
+                p-4
+                border-b
+                border-zinc-800
                 flex
-                justify-between
-                items-center
-                mb-4
-              "
-            >
+                gap-3
+            ">
 
-              <h2
-                className="
-                  text-xl
-                  font-bold
-                "
-              >
-                {result.company}
-                {" "}
-                ({result.ticker})
-              </h2>
+                <input
 
-              <span
-                className="
-                  text-cyan-400
-                  text-sm
-                "
-              >
-                Similarity:
-                {" "}
-                {result.similarity
-                  ?.toFixed(3)}
-              </span>
+                    type="text"
+
+                    placeholder="
+                        Search semantic propagation...
+                    "
+
+                    value={query}
+
+                    onChange={(e) =>
+                        setQuery(e.target.value)
+                    }
+
+                    className="
+                        flex-1
+                        bg-zinc-900
+                        border
+                        border-zinc-700
+                        rounded-lg
+                        px-4
+                        py-3
+                        outline-none
+                    "
+                />
+
+                <button
+
+                    onClick={handleSearch}
+
+                    className="
+                        px-6
+                        py-3
+                        rounded-lg
+                        bg-blue-600
+                        hover:bg-blue-700
+                        transition
+                    "
+                >
+
+                    {loading
+                        ? "Loading..."
+                        : "Search"}
+
+                </button>
 
             </div>
 
-            <p
-              className="
-                text-zinc-300
-                leading-relaxed
-              "
-            >
-              {result.chunk_text}
-            </p>
+            {/* ================================================= */}
+            {/* THEMES */}
+            {/* ================================================= */}
 
-          </div>
-        ))}
+            <div className="
+                px-4
+                py-2
+                border-b
+                border-zinc-800
+                flex
+                gap-2
+                flex-wrap
+            ">
 
-      </div>
+                {graphData.themes.map(
 
-      {/* ========================================= */}
-      {/* GRAPH */}
-      {/* ========================================= */}
+                    (theme) => (
 
-      {graphData && (
+                        <div
 
-        <div
-          className="
-            h-[700px]
-            mt-12
-            border
-            border-cyan-500/20
-            rounded-3xl
-            overflow-hidden
-          "
-        >
+                            key={theme}
 
-          <PropagationGraph
+                            className="
+                                px-3
+                                py-1
+                                rounded-full
+                                bg-zinc-800
+                                text-sm
+                                text-zinc-300
+                            "
+                        >
 
-            nodes={graphData.nodes}
+                            {theme}
 
-            edges={graphData.edges}
+                        </div>
+                    )
+                )}
 
-          />
+            </div>
+
+            {/* ================================================= */}
+            {/* MAIN LAYOUT */}
+            {/* ================================================= */}
+
+            <div className="
+                flex-1
+                flex
+                overflow-hidden
+            ">
+
+                {/* ============================================= */}
+                {/* GRAPH */}
+                {/* ============================================= */}
+
+                <div className="flex-1 p-4">
+
+                    <SemanticGraph
+
+                        nodes={graphData.nodes}
+
+                        edges={graphData.edges}
+
+                        onNodeClick={handleNodeClick}
+                    />
+
+                </div>
+
+                <div className="
+                    w-[420px]
+                    min-w-[420px]
+                    flex
+                    flex-col
+                    border-l
+                    border-zinc-800
+                ">
+
+                    {/* ================================================ */}
+                    {/* NODE DETAILS */}
+                    {/* ================================================ */}
+
+                    <div className="
+                        h-[35%]
+                        border-b
+                        border-zinc-800
+                        overflow-hidden
+                    ">
+
+                        <NodeDetailsPanel
+
+                            selectedNode={selectedNode}
+                        />
+
+                    </div>
+
+                    {/* ============================================ */}
+                    {/* RETRIEVAL EVIDENCE */}
+                    {/* ============================================ */}
+
+                    <div className="
+                        h-[30%]
+                        border-b
+                        border-zinc-800
+                        overflow-hidden
+                    ">
+
+                        <RetrievalPanel
+
+                            nodes={graphData?.nodes || []}
+                        />
+
+                    </div>
+
+                    {/* ============================================ */}
+                    {/* AGENTS */}
+                    {/* ============================================ */}
+
+                    <div className="
+                        h-[35%]
+                        overflow-hidden
+                    ">
+
+                        <AgentPanel
+
+                            agents={agentInsights}
+                        />
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
-      )}
-
-    </div>
-  );
+    );
 }

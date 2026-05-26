@@ -1,19 +1,46 @@
-from backend.app.services.retrieval_service import (
-    semantic_graph_expansion
+# ============================================================
+# FILE: backend/app/services/graph_service.py
+# ============================================================
+
+from src.rag.graph_retrieval import (
+    retrieve_graph_context
 )
 
-# ======================================================
-# GRAPH SERVICE
-# ======================================================
+# ============================================================
+# GRAPH QUERY SERVICE
+# ============================================================
 
-def get_graph_data(
+def get_query_graph(
 
-    query="AI infrastructure demand"
+    query: str,
 
+    top_k_chunks: int = 5,
+
+    neighbors_per_chunk: int = 5
 ):
 
-    graph = semantic_graph_expansion(
-        query=query
+    graph_data = retrieve_graph_context(
+
+        query=query,
+
+        top_k_chunks=top_k_chunks,
+
+        neighbors_per_chunk=neighbors_per_chunk
     )
 
-    return graph
+    return {
+
+        "success": True,
+
+        "query": graph_data["query"],
+
+        "themes": graph_data["themes"],
+
+        "num_nodes": graph_data["num_nodes"],
+
+        "num_edges": graph_data["num_edges"],
+
+        "nodes": graph_data["nodes"],
+
+        "edges": graph_data["edges"]
+    }

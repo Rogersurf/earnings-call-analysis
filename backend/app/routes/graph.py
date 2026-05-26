@@ -1,25 +1,52 @@
+# ============================================================
+# FILE: backend/app/routes/graph.py
+# ============================================================
+
 from fastapi import APIRouter
+from pydantic import BaseModel
 
 from backend.app.services.graph_service import (
-    get_graph_data
+    get_query_graph
 )
 
-router = APIRouter(
-    prefix="/graph",
-    tags=["graph"]
-)
+# ============================================================
+# ROUTER
+# ============================================================
 
-@router.get("/propagation")
-async def graph_propagation_route(
+router = APIRouter()
 
-    query: str = "AI infrastructure demand"
+# ============================================================
+# REQUEST MODEL
+# ============================================================
 
+class GraphQueryRequest(BaseModel):
+
+    query: str
+
+    top_k_chunks: int = 5
+
+    neighbors_per_chunk: int = 5
+
+# ============================================================
+# GRAPH QUERY ENDPOINT
+# ============================================================
+
+@router.post("/query")
+
+def query_graph(
+
+    request: GraphQueryRequest
 ):
 
-    results = get_graph_data(
-        query=query
+    graph = get_query_graph(
+
+        query=request.query,
+
+        top_k_chunks=
+            request.top_k_chunks,
+
+        neighbors_per_chunk=
+            request.neighbors_per_chunk
     )
 
-    return {
-        "results": results
-    }
+    return graph
