@@ -224,11 +224,11 @@ export default function PropagationGraph({
       >
 
         {/* GRID */}
-        <Background
+        {/* <Background
           gap={28}
           size={1}
           color="#132038"
-        />
+        />*/}
 
         {/* MINIMAP */}
         <MiniMap

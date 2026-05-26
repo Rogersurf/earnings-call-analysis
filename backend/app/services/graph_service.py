@@ -1,42 +1,19 @@
-def get_graph_data():
+from backend.app.services.retrieval_service import (
+    semantic_graph_expansion
+)
 
-    return {
+# ======================================================
+# GRAPH SERVICE
+# ======================================================
 
-        "nodes": [
+def get_graph_data(
 
-            {
-                "id": "nvda",
-                "label": "NVIDIA",
-                "sector": "Semiconductors"
-            },
+    query="AI infrastructure demand"
 
-            {
-                "id": "tsmc",
-                "label": "TSMC",
-                "sector": "Semiconductors"
-            },
+):
 
-            {
-                "id": "aws",
-                "label": "AWS",
-                "sector": "Cloud"
-            }
+    graph = semantic_graph_expansion(
+        query=query
+    )
 
-        ],
-
-        "edges": [
-
-            {
-                "source": "nvda",
-                "target": "tsmc",
-                "relation": "chip demand"
-            },
-
-            {
-                "source": "nvda",
-                "target": "aws",
-                "relation": "AI infrastructure"
-            }
-
-        ]
-    }
+    return graph

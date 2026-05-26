@@ -10,9 +10,15 @@ router = APIRouter(
 )
 
 @router.get("/propagation")
-async def graph_propagation_route():
+async def graph_propagation_route(
 
-    results = get_graph_data()
+    query: str = "AI infrastructure demand"
+
+):
+
+    results = get_graph_data(
+        query=query
+    )
 
     return {
         "results": results

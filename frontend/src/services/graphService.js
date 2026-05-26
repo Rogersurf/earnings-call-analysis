@@ -1,26 +1,25 @@
-import API_BASE_URL from "./api";
+const API_URL =
+  "http://127.0.0.1:8000";
 
-export async function fetchPropagationGraph() {
+export async function fetchGraph(query) {
 
-    try {
+  try {
 
-        const response = await fetch(
-            `${API_BASE_URL}/graph/propagation`
-        );
+    const response = await fetch(
 
-        if (!response.ok) {
-            throw new Error("Graph request failed");
-        }
+      `${API_URL}/graph/propagation?query=${encodeURIComponent(query)}`
 
-        return await response.json();
+    );
 
-    } catch (error) {
+    return await response.json();
 
-        console.error(
-            "Graph retrieval error:",
-            error
-        );
+  } catch (error) {
 
-        return null;
-    }
+    console.error(
+      "Graph fetch error:",
+      error
+    );
+
+    return null;
+  }
 }
