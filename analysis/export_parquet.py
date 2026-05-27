@@ -21,7 +21,9 @@ def main():
         "[/bold cyan]"
     )
 
-    conn = sqlite3.connect(INPUT_DB)
+    conn = sqlite3.connect(
+        INPUT_DB
+    )
 
     query = """
     SELECT *
@@ -40,6 +42,22 @@ def main():
         f"Loaded {len(df)} rows"
         f"[/bold green]"
     )
+
+    # =====================================================
+    # VALIDATION
+    # =====================================================
+
+    print(
+        "\n[bold yellow]"
+        "Validating columns..."
+        "[/bold yellow]"
+    )
+
+    print(df.columns)
+
+    # =====================================================
+    # EXPORT PARQUET
+    # =====================================================
 
     print(
         "\n[bold yellow]"
@@ -64,6 +82,55 @@ def main():
         f" {OUTPUT_PARQUET}"
         f"[/bold cyan]"
     )
+
+    # =====================================================
+    # FINAL VALIDATION
+    # =====================================================
+
+    parquet_df = pd.read_parquet(
+        OUTPUT_PARQUET
+    )
+
+    print(
+        "\n[bold yellow]"
+        "PARQUET VALIDATION"
+        "[/bold yellow]"
+    )
+
+    print(
+        parquet_df.columns
+    )
+
+    print(
+        parquet_df.shape
+    )
+
+    # =====================================================
+    # SPEAKER TURNS VALIDATION
+    # =====================================================
+
+    if "speaker_turns" in parquet_df.columns:
+
+        print(
+            "\n[bold green]"
+            "speaker_turns detected"
+            "[/bold green]"
+        )
+
+        print(
+            parquet_df[
+                "speaker_turns"
+            ]
+            .head(3)
+        )
+
+    else:
+
+        print(
+            "\n[bold red]"
+            "speaker_turns NOT FOUND"
+            "[/bold red]"
+        )
 
 
 if __name__ == "__main__":
