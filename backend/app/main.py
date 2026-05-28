@@ -16,6 +16,10 @@ from backend.app.routes.agents import (
     router as agents_router
 )
 
+from backend.app.routes.research import (
+    router as research_router
+)
+
 # ============================================================
 # FASTAPI APP
 # ============================================================
@@ -64,6 +68,10 @@ app.include_router(
 
 app.include_router(
     agents_router
+)
+
+app.include_router(
+    research_router
 )
 
 # ============================================================

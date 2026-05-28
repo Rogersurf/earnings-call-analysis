@@ -252,3 +252,5 @@ temp/
 #!analysis/reports/example_report.pdf
 
 parquet_registry.csv
+
+data/chroma_db
