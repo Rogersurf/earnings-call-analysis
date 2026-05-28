@@ -8,6 +8,10 @@ from backend.app.research_pipeline.retrieval.reranker import (
     FinancialReranker
 )
 
+from backend.app.research_pipeline.retrieval.query_expander import (
+    QueryExpander
+)
+
 
 class HybridRetriever:
 
@@ -25,6 +29,8 @@ class HybridRetriever:
             embedding_model
         )
         self.reranker = FinancialReranker()
+        
+        self.query_expander = QueryExpander()
 
     def get_collection(
         self,
@@ -45,9 +51,15 @@ class HybridRetriever:
         collection = self.get_collection(
             collection_name
         )
+        
+        expanded_query = (
+            self.query_expander.expand(
+                query
+            )
+        )
 
         query_embedding = self.model.encode(
-            query,
+            expanded_query,
             normalize_embeddings=True,
         ).tolist()
 

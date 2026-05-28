@@ -254,3 +254,4 @@ temp/
 parquet_registry.csv
 
 data/chroma_db
+data/chroma/

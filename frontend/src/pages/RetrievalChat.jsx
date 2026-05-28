@@ -29,6 +29,9 @@ import {
 
 } from "../services/agentService";
 
+import PropagationPanel
+from "../components/intelligence/PropagationPanel";
+
 // ============================================================
 // COMPONENT
 // ============================================================
@@ -322,6 +325,30 @@ export default function RetrievalChat() {
                         <AgentPanel
 
                             agents={agentInsights}
+                        />
+
+                    </div>
+
+                    {/* ================================================= */}
+                    {/* PROPAGATION INTELLIGENCE */}
+                    {/* ================================================= */}
+
+                    <div className="
+                        h-[380px]
+                        border-t
+                        border-zinc-800
+                        overflow-hidden
+                    ">
+
+                        <PropagationPanel
+
+                            propagationTargets={
+                                graphData?.propagation_targets || []
+                            }
+
+                            signalDetails={
+                                graphData?.signal_details || []
+                            }
                         />
 
                     </div>
